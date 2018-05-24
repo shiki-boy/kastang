@@ -16,6 +16,7 @@
     "bcryptjs": "^2.4.3",
     "connect-mongo": "^2.0.1",
     "express": "^4.14.0",
+    "hbs":"^4.0.1",
     "express-session": "^1.15.6",
     "lodash": "^4.17.4",
     "mongoose": "^4.5.9",
