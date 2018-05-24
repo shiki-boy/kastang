@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>KasTang</title>
+
+  <!-- CSS  -->
+  <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+  <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/logo.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/my-css.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/animate.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <script src="js/handlebars.js"></script>
+</head>
+
+<style type="text/css">
+ #whole{
+  -webkit-animation-duration: 1.5s;
+  -vendor-animation-iteration-count: 1;
+  }
+
+</style>
+
+<body id="whole" class="animated fadeIn">
+
+    {{> navbar}}
+
+      <div class="section"></div>
+      <h3 class="light container">Search Results For: "<span class="green-text"> {{query}} </span> "</h3>
+      <div class="section"></div>
+      <table class="container highlight">
+        <thead>
+              <th>Company</th>
+              <th>Product</th>
+              <th>&#8377 Price</th>
+        </thead>
+        <tbody>
+      {{#each results}}
+        <tr target="/buy/{{Cname}}-{{Pname}}">
+            <td class="teal-text">{{Cname}}</td>
+            <td class="green-text">{{Pname}}</td>
+            <td class="pink-text">&#8377 {{price}}</td>
+        </tr>
+      {{/each}}
+          </tbody>
+      </table>
+    
+    <div class="section"></div>
+    <div class="section"></div>
+    <div class="section"></div>
+    <div class="section"></div>
+    {{> footer}}
+
+
+            {{!-- Scripting   --}}
+  <script src="js/jquery.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/my-script.js"></script>
+  
+  <script>
+      
+    $(document).ready(()=>{
+
+      $("tr").click(function(){
+        var goto =  $(this).attr('target');
+        console.log(goto);
+        window.open(goto);
+      });
+
+    });
+
+    
+  </script>
+</body>

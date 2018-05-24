@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/ms-icon-310x310.png">
+  <title>KasTang</title>
+
+  <!-- CSS  -->
+  <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+  <link href="/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+  <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/css/logo.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/css/my-css.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/css/animate.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+</head>
+
+
+<style type="text/css">
+    #materialbox-overlay{
+        background-color: white;
+    }
+    #testing.li{
+        opacity: 0;
+    }
+    #whole{
+    -webkit-animation-duration: 1.5s;
+    -vendor-animation-iteration-count: 1;
+    }    
+</style>
+
+
+<body id="whole" class="animated fadeIn">
+    
+    {{> navbar}}
+
+<div id="extra" class="section this"></div>
+<div id="preloader-div" class="container center this">
+    <div class="preloader-wrapper big active ">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    {{!--<h4 class="center medium teal-text section"> {{productName}} </h3>--}}
+    <ul id="testing" class="section center teal-text">
+        <li ><h3>{{productName}}</h3></li>
+        <li ><h4 id="price">&#8377 {{price}}</h4></li>
+        <div id="discount-here"></div>
+        <li id="discount">{{discount}}</li>
+        <li><p class="green-text" style="font-size: 17px;">Items sold : 10</p></li>
+    </ul>
+
+    <div class="container scale-transition scale-out">
+        <div class="carousel center">
+            {{#each imgInfo}}
+            <a class="carousel-item" ><img class="materialboxed" width="200"  src="/images/{{img_name}}-{{n}}.jpg"></a>
+            {{/each}}
+        </div>
+    </div>
+
+
+    {{!-- <div class="row container scale-transition scale-out">
+            <a class="cart col m4 push-m1 btn-large green waves-effect waves-red">
+                <i class="material-icons left">shopping_cart</i><span>Add to cart</span></a>
+            <a  class="col m4 push-m2 btn-large blue waves-effect waves-red">
+                <i class="material-icons left">done</i>Buy now</a>
+    </div> --}}
+
+<form action="/charge" method="POST">
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" 
+            data-key="pk_test_tqYSgk3uCXpQTGQmvwcj3KGh" 
+            data-amount="11200000"
+            data-currency="INR"
+            data-name="{{productName}}" 
+            data-description="{{price}}" 
+            data-image="/images/marketplace.png"
+            data-locale="auto">
+    </script>
+    <script>
+        // to hide the default buy button by stripe
+        document.getElementsByClassName('stripe-button-el')[0].style.display = "none";
+    </script>
+    <div class="row container scale-transition scale-out">
+        <a class="cart col m4 push-m1 btn-large green waves-effect waves-red">
+            <i class="material-icons left">shopping_cart</i>
+            <span>Add to cart</span>
+        </a>
+        <button type="submit" name="action" class="col m4 push-m2 btn-large blue waves-effect waves-red">
+            <i class="material-icons left">done</i>Buy now</button>
+    </div>
+</form>
+    
+    
+    <ul class="collapsible popout scale-transition scale-out" data-collapsible="expandable">
+        
+        <li>
+            <div class="collapsible-header">
+                <i class="material-icons">assignment</i>General
+            </div>
+            <div class="collapsible-body">
+                <table class="highlight ">
+                    <tbody>
+                        <tr>
+                            <td class="light">Sales Package</td>
+                            <td>Laptop, Charger, Warranty Documents, ..</td>
+                        </tr>
+                        <tr>
+                            <td class="light">Model Number</td>
+                            <td>13v7fyf6</td>
+                        </tr>
+                        <tr>
+                            <td class="light">Model Name</td>
+                            <td>Spectre</td>
+                        </tr>
+                        <tr>
+                            <td class="light">Battery Backup</td>
+                            <td>upto 9 hrs.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+        
+        <li>
+            <div class="collapsible-header">
+                <i class="material-icons">build</i>Operating System
+            </div>
+            <div class="collapsible-body">
+                <table class=" highlight">
+                    <tbody>
+                        <tr>
+                            <td class="light">OS Architecture</td>
+                            <td>64 bit</td>
+                        </tr>
+                        <tr>
+                            <td class="light">OS</td>
+                            <td>Windows 10 Home</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+
+        <li>
+            <div class="collapsible-header">
+                <i class="material-icons">dashboard</i>Port and Slot Features
+            </div>
+            <div class="collapsible-body">
+                <table class=" highlight">
+                    <tbody>
+                        <tr>
+                            <td class="light">Mic in</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td class="light">USB Port</td>
+                            <td>2 X USB 3.1 (2nd gen type-C with Thunderbolt 3rd gen) 1 X USB 3.1 (1st gen type-C)</td>
+                        <tr>
+                            <td class="light">HDMI Port</td>
+                            <td>1</td>
+                        </tr>   
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+
+        <li>
+            <div class="collapsible-header">
+                <i class="material-icons">info</i>Display and Audio Features
+            </div>
+            <div class="collapsible-body">
+                <table class=" highlight">
+                    <tbody>
+                        <tr>
+                            <td class="light">Touchscreen</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td class="light">Screen Size</td>
+                            <td>13.3 inch</td>
+                        <tr class="light">
+                            <td>Screen Resolution</td>
+                            <td>1920 X 1080 px</td>
+                        </tr>
+                        <tr class="light">
+                            <td>Screen Type</td>
+                            <td>FHD LED Backlit Display</td>
+                        </tr>
+                        <tr class="light">    
+                            <td>Speakers</td>
+                            <td>Quad Speakers</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+        
+        <li>
+            <div class="collapsible-header">
+                <i class="material-icons">swap_horiz</i>Dimensions
+            </div>
+            <div class="collapsible-body">
+                <table class=" highlight">
+                    <tbody>
+                        <tr>
+                            <td class="light">Dimensions</td>
+                            <td>325.12x229.12x10.41 mm</td>
+                        </tr>
+                        <tr>
+                            <td class="light">Weight</td>
+                            <td>1.1kg</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+
+        <li>
+            <div class="collapsible-header">
+                <i class="material-icons">add</i>Additional Featues
+            </div>
+            <div class="collapsible-body">
+                <table class="highlight ">
+                    <tbody>
+                        <tr>
+                            <td class="light">Disk Drive</td>
+                            <td>N/A</td>
+                        </tr>
+                        <tr>
+                            <td class="light">Web Cam</td>
+                            <td>HP true vision Hd webcam</td>
+                        </tr>
+                        <tr>
+                            <td class="light">Anti-Virus</td>
+                            <td>McCafe Lifesave</td>
+                        </tr>
+                        <tr>
+                            <td class="light">Keyboard</td>
+                            <td>Backlit island-style </td>
+                        </tr>
+                        <tr>
+                            <td class="light">Pointer Device</td>
+                            <td> Touchpad with multi-touch gesture support</td>
+                        </tr>    
+                        <tr>
+                           <td class="light">Laptop Bag</td>
+                            <td>No</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+        
+
+    </ul>
+
+    <div class="section"></div>
+    {{> footer}}
+
+          {{!-- Scripting   --}}
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/materialize.js"></script>
+  <script src="/js/my-script.js"></script>
+  <script type="text/javascript">
+
+
+    $(window).on('load',function(){
+        console.log('load ho gaya');
+        $("#preloader-div,#extra").fadeOut();
+        appear();
+    });
+
+    
+    var x = 0;
+    $(document).ready(function(){
+        
+        $('.collapsible').collapsible();
+
+
+        document.getElementById('discount').innerText += '% off';
+        if($('#discount').text() == '0% off'){
+            $("#discount").hide();            
+        }
+        else{
+            $("#price").css({'text-decoration':'line-through'});
+            var discount = parseFloat($('#discount').text()) ;
+            var price = parseFloat($('#price').text().split(' ')[1].replace(/\,/g, ''));
+            var final_price = price - price * discount/100;
+            //console.log(final_price.toLocaleString('en-IN'));
+
+            var html = `<h4 style="font-size:41px;">&#8377 ${final_price.toLocaleString('en-IN')}<h4>`;
+            $('#discount-here').append(html);
+        }
+        $('.cart').click(function () {
+            if(x%2==0){
+                document.getElementsByClassName('cart')["0"].children[1].innerText = 'remove from cart';
+                x++;
+            }
+            else{
+                document.getElementsByClassName('cart')["0"].children[1].innerText = 'add to cart';
+                x++;
+            }
+
+            $(this).toggleClass('orange');
+            var name = $(this).parent().siblings();
+            name = name[0].innerText;
+            link = encodeURIComponent(name);
+
+            $.ajax({
+                url: `/addToCart/${link}`,
+                type: 'GET',
+                success: function (data) {
+                    M.toast({html: '<span>Added to cart</span>', displayLength: 8000});
+                },
+                error: function () {
+                    {{!-- $("#whole").css('-webkit-animation-duration', '2.8s');
+                    $("body").addClass('hinge');
+                    setTimeout(() => {
+                        window.open('/error', "_self");
+                    }, 3000); --}}
+                }
+            });
+
+        });
+
+        $('.carousel').carousel({
+            dist: 0
+        });
+
+        $('.materialboxed').materialbox({
+            onOpenStart:function(){
+                $(".btn-large").hide();
+                $("nav").fadeOut();
+            },
+            onCloseStart:function(){
+                $(".btn-large").show("fast");
+                $("nav").fadeIn();
+            }
+        });
+
+    });
+    
+
+    function appear(){
+        $(".scale-transition").removeClass('scale-out');
+        $(".scale-transition").removeClass('scale-in');
+    }
+  </script>
+
+</body>
+</html>

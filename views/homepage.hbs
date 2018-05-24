@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/ms-icon-310x310.png">
+  <title>KasTang</title>
+
+  <!-- CSS  -->
+  <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+  <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/my-css.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/animate.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+<style type="text/css">
+  body{
+    background: rgba(23, 33, 172, 0.808);
+  }
+  #logo {
+    font-family: AR Cena;
+    text-shadow: 3px 4px 0px red;
+    font-size: 89px;
+    color: white;
+  }
+
+  
+
+  img.responsive-img {
+    height: -webkit-fill-available;
+  }
+
+  /*#here {
+    background:coral;
+    background-size: cover;
+    background-position-y: 31%;
+    margin-top: -30px;
+    height: 42em;
+    background: linear-gradient(270deg, #1d04ff, #23ca9f, #1881c8, #ba20dd, #f5fb08, #ff0009);
+    background-size: 600% 600%;
+    -webkit-animation: bgAnimaie 6s ease 12s;
+    -moz-animation: bgAnimaie 6s ease 12s;
+    animation: bgAnimaie 6s ease 12s;
+    
+  }
+
+ #info1,#info3,#info2 {
+        -webkit-animation: bgAnimaie 4s ease infinite;
+        -moz-animation: bgAnimaie 4s ease infinite;
+        animation: bgAnimaie 4s ease infinite;
+  }
+
+    @-webkit-keyframes bgAnimaie {
+        0% {
+          background-position: 0% 41%
+        }
+        50% {
+          background-position: 100% 60%
+        }
+        100% {
+          background-position: 0% 41%
+        }
+      }
+      @-moz-keyframes bgAnimaie {
+        0% {
+          background-position: 0% 41%
+        }
+        50% {
+          background-position: 100% 60%
+        }
+        100% {
+          background-position: 0% 41%
+        }
+      }
+      @keyframes bgAnimaie {
+        0% {
+          background-position: 0% 41%
+        }
+        50% {
+          background-position: 100% 60%
+        }
+        100% {
+          background-position: 0% 41%
+        }
+      }*/
+</style>
+
+<body id="whole" class="animated fadeIn">
+
+  {{!-- {{> navbar}}  --}}
+  {{!-- {{> brandlogo}} --}}
+
+  <div class="navbar-fixed">
+    <nav id="navbar" class="animated slideInDown" style="height: 75px;">
+      <div class="nav-wrapper blue darken-1" style="border-bottom-left-radius: 20px;border-bottom-right-radius: 24px;">
+        <a href="#" data-target="slide-out" class="sidenav-trigger" style="display: block;">
+          <i class="material-icons">menu</i>
+        </a>
+        <a style="font-family: AR Cena;
+                     text-shadow: 3px 4px 0px red;
+                     font-size: 47px;" href="javascript:delay('/home')" class="brand-logo white-text logoPos">KasTang</a>
+        <ul class="right">
+          <li style="margin-right: 15px;">
+            <a class="dropdown-trigger" href="#!" data-target="gaming-content">
+              <i class="material-icons" style="font-size: 44px;">videogame_asset</i>
+            </a>           
+          </li>
+          <li style="margin-right: 15px;">
+            <a class="dropdown-trigger" href="#!" data-target="laptop-content">
+              <i style="font-size: 44px;" class="material-icons">laptop_mac</i>
+            </a>
+          </li>
+          <li style="margin-right: 15px;">
+            <a class="dropdown-trigger" href="#!" data-target="phone-content">
+              <i style="font-size: 44px;" class="material-icons">phone_android</i>
+            </a>
+          </li>
+          <li style="margin-right: 30em;;">
+            <a class="dropdown-trigger" href="#!" data-target="pc-content">
+              <i style="font-size: 44px;" class="material-icons">desktop_windows</i>
+            </a>
+          </li>
+          <li style="">
+            <a href="sass.html">
+              <i class="material-icons">search</i>
+            </a>
+          </li>
+  
+        </ul>
+      </div>
+    </nav>
+  
+    <ul id="gaming-content" class="dropdown-content" style="width: 100%;">
+      <li>
+        <a href="">All</a>
+      </li>
+      <li>
+        <a href="">Consoles</a>
+      </li>
+      <li>
+        <a href="">Games</a>
+      </li>
+      <li>
+        <a href="">Accessories</a>
+      </li>
+    </ul>
+  
+    <ul id="laptop-content" class="dropdown-content">
+      <li>
+        <a href="javascript:delay('/laptops')">All</a>
+      </li>
+      <li>
+        <a href="">Gaming</a>
+      </li>
+      <li>
+        <a href="">Developers</a>
+      </li>
+      <li>
+        <a href="">Standard</a>
+      </li>
+    </ul>
+  
+    <ul id="phone-content" class="dropdown-content">
+      <li>
+        <a href="/mobiles">All</a>
+      </li>
+      <li>
+        <a href="">Accessories</a>
+      </li>
+    </ul>
+  
+    <ul id="pc-content" class="dropdown-content">
+      <li>
+        <a href="">All</a>
+      </li>
+      <li>
+        <a href="">Gaming</a>
+      </li>
+      <li>
+        <a href="">Accessories</a>
+      </li>
+    </ul>
+  
+    <ul id="account-content" class="dropdown-content">
+      <li>
+        <a href="">Sign Up</a>
+      </li>
+      <li>
+        <a href="">Log In</a>
+      </li>
+    </ul>
+  
+  
+  </div>
+  <ul id="slide-out" class="sidenav">
+    <li>
+      <div class="user-view">
+        <div class="background">
+          <img src="/images/trees.jpg" alt="img">
+        </div>
+        <a href="">
+          <img class="circle" src="" alt="">
+        </a>
+        <a href="">
+          <span class="white-text name">Raghav Kaushik</span>
+        </a>
+        <a href="">
+          <span class="white-text email">raghav.kaushik611@gmail.com</span>
+        </a>
+      </div>
+    </li>
+    <li>
+      <a href="/home">
+        <i class="material-icons">weekend</i>Home</a>
+    </li>
+    <li>
+      <a href="/signup">
+        <i class="material-icons">create</i>Sign Up</a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="material-icons">whatshot</i>Trending</a>
+    </li>
+    <li>
+      <a href="">sec link</a>
+    </li>
+    <li>
+      <div class="devider"></div>
+    </li>
+    <li>
+      <a href="/login" class="waves-effect">
+        <i class="material-icons">portrait</i>Log In</a>
+    </li>
+    <li>
+      <a href="" class="waves-effect">
+        <i class="material-icons">face</i>Log out</a>
+    </li>
+  </ul>
+
+
+  <div id="here" class="">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1 id="logo" class="center-align">KasTang</h1>
+    <h3 class="center-align light black-text">#1 Selling & Most Popular
+      <br>
+    </h3>
+    <h4 class="center-align light grey-text text-darken-3">Join the 2.5M satisfied customers today</h4>
+    <div class="container center">
+      <div class="section"></div>
+      <div class="section"></div>
+      <a class="waves-effect waves-blue btn-large pink pulse" id="explore" style="border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;">
+        Explore</a>
+    </div>
+  </div>
+
+
+  <div id="scrollhere" class="container section">
+    <nav>
+      <div class="nav-wrapper">
+        <form action="/search" method="GET">
+          <div class="input-field blue" id="searchbar">
+            <input id="search" type="search" name="stuff" placeholder="Search here" autocomplete="off">
+            <label for="search" class="label-icon" style="top:-9px;padding-left: 15px;">
+              <i class="material-icons">search</i>
+            </label>
+            <i class="material-icons">close</i>
+          </div>
+        </form>
+      </div>
+    </nav>
+  </div>
+
+
+  <div class="container row">
+    <div class="col s4 m4">
+      <div id="info1" class="card info big hoverable z-depth-3" style="background:linear-gradient(270deg, #ffc404,#ee0505d8);background-size: 600% 600%;">
+        <div class="card-content white-text">
+          <span class="card-title"></span>
+          <p class="light center-align">NEW ARRIVALS</p>
+        </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s4 m4">
+      <div id='info2' class="card info big hoverable z-depth-3" style="background:linear-gradient(270deg, #1d04ff,#f0034a);background-size: 600% 600%;">
+        <div class="card-content white-text">
+          <span class="card-title"></span>
+          <p class="center-align light">20% OFF ON COMPUTER ACCESSORIES</p>
+        </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s4 m4">
+      <div id="info3" class="card big info hoverable z-depth-3" style="background:linear-gradient(270deg, #ff0479,#b623ca);background-size: 600% 600%;">
+        <div class="card-content white-text">
+          <span class="card-title"></span>
+          <p class="center-align light">50% OFF ON GAMES</p>
+        </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{> backtotop }}
+
+
+
+  {{> footer}} {{!-- Scripting --}}
+  <script src="js/jquery.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/my-script.js"></script>
+  <script type="text/javascript">
+
+
+   
+
+    $(document).ready(() => {
+
+
+      $('#search ').autocomplete({
+        data: {
+          "Laptop": null,
+          "Smartphones": null,
+          "Gaming PC": null,
+          "Gaming laptop": null,
+          "Lenovo laptops": null
+        },
+        limit: 5,
+        minLength: 1,
+        onAutocomplete: function (val) {
+
+        }
+      });
+
+      
+      });
+
+  </script>
+</body>
+
+</html>

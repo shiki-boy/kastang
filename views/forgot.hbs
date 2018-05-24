@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Log in Page</title>
+
+    <!-- CSS  -->
+    <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+<style>
+    body {
+        background: cornflowerblue;
+    }
+
+    .input-field .prefix.active {
+        color: rgb(255, 255, 255) !important;
+    }
+
+    /* label color */
+
+    .input-field label,
+    .input-field input[type=email] {
+        color: #000;
+    }
+
+    /* label focus color */
+
+    .input-field input[type=email]:focus+label {
+        color: #000 !important;
+    }
+
+    /* label underline focus color */
+
+    .input-field input[type=email]:focus {
+        border-bottom: 1px solid rgb(255, 255, 255) !important;
+        box-shadow: 0 1px 0 0 rgb(252, 252, 252) !important;
+    }
+</style>
+
+<body>
+
+    <div class="section"></div>
+    <div class="section"></div>
+    <div class="row container">
+        <h4 class="white-text light center-align">We will send you a URL redirect in your mail</h4>
+    </div>
+
+    <div class="row ">
+        <form action="/forgot" method="POST">
+            <div class="input-field  col s12 l6 push-l3">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="email" type="email" name="email" class="validate white-text" required>
+                <label for="email" class="flow-text">email</label>
+                <p style="margin-top:-14px;margin-left:34px;opacity:0.7;">Enter your Valid Email</p>
+            </div>
+    </div>
+    <div class="container">
+        <a class="waves-effect waves-red btn-flat">Back to home</a>
+        <button class="btn waves-effect green right" style="border-radius: 10px;" type="submit" name="action">send
+            <i class="material-icons right">send</i>
+        </button>
+        </form>
+    </div>
+
+
+
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+
+</body>
+
+</html>

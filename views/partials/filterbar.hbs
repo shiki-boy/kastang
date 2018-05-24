@@ -1,0 +1,50 @@
+<div class="row" style="position:absolute; width: 37% !important;">
+    <div id="filterbar" class="col hide-on-small-only m5" style="opacity:0.85;">
+        <ul class="collapsible z-depth-4" data-collapsible="accordion">
+            <li>
+                <div class="collapsible-header green accent-4">
+                    <i class="material-icons">stars</i>By Brands</div>
+                <div class="collapsible-body">
+                    {{#each brands}}
+                    <p>
+                        <input type="checkbox" class="filled-in" id="{{ this }}-check" />
+                        <label for="{{ this }}-check" style="color:black;">{{ this }}</label>
+                    </p>
+                    {{/each }}
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header purple lighten-2">
+                    <i class="material-icons">sort</i>Sort By</div>
+                <div class="collapsible-body">
+                    <p>
+                        <input class="with-gap" name="group1" type="radio" id="pop-check" />
+                        <label for="pop-check" style="color: black;">Popularity</label>
+                    </p>
+                    <p>
+                        <input class="with-gap" name="group1" type="radio" id="high-check" />
+                        <label for="high-check" style="color: black;">Price: Low to High</label>
+                    </p>
+                    <p>
+                        <input class="with-gap" name="group1" type="radio" id="low-check" />
+                        <label for="low-check" style="color: black;">Price: High to Low</label>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header">
+                    <i class="material-icons">call_made</i>Price Range</div>
+                <div class="collapsible-body">
+                    <div class="input-field">
+                        <input id="price-from" type="number" class="">
+                        <label for="price-from">From</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="price-to" type="number" class="">
+                        <label for="price-to">To</label>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

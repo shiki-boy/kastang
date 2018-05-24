@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/ms-icon-310x310.png">
+  <title>Sign Up Page</title>
+
+  <!-- CSS  -->
+  <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+  <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/animate.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+
+
+<style type="text/css">
+    #line{
+        height: 2px;
+    }
+    #conn{
+        margin-top: -15px;
+        {{!--font-size: 18px;--}}
+    }
+    #whole{
+  -webkit-animation-duration: 1.5s;
+  -webkit-animation-iteration-count: 1;
+}
+</style>
+<body id="whole" class="animated fadeIn">
+  <nav> 
+      <div class='nav-wrapper z-depth-3 green accent-3'>
+          <a href='#' class="brand-logo center white-text"> Sign Up </a>
+            <ul  class='left hide-on-med-and-down'>
+                <li><a href="http://localhost:1234/home">
+                    <i class="material-icons prefix white-text">home</i>
+                </a>
+                </li>
+                <li><a>link2</a></li>
+            </ul>
+      </div>
+  </nav>
+
+
+<div class="row">
+    <form class="col s12" style="margin-top:25px;" method="POST" action="/CreateNewUser">
+        <div class="row">
+            <div class="input-field col s12 m6 l6"> 
+                <i class="material-icons prefix">account_circle</i>
+                <input id="first_name" type="text" name="fname" class="validate" required>
+                <label for="first_name">First Name</label>
+                 </div>
+            <div class="input-field col s12 m6 l6"> 
+                <i class="material-icons prefix">account_circle</i>
+                <input id="last_name" type="text" name="lname" class="validate" required> 
+                <label for="last_name">Last Name</label>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="input-field col s12 m6 l6">
+                 <i class="material-icons prefix">email</i>
+                 <input id="email" type="email" name="email" class="validate" required> 
+                 <label for="password" >Email</label>
+                 <p class="col m6 offset-m1" 
+                 style="margin-top:-14px;margin-left:37px;opacity:0.7;
+                 ">we will never share your email with anyone</p>
+             </div>
+             
+             <p class="center col s3 m3 push-s2">
+                 <label>
+                    <input name="gender" type="radio" value="male" required>
+                    <span class="black-text">Male</span>
+                 </label>
+             </p>
+             <p class="center col s3 m3 push-s3 pull-m1">
+                 <label>
+                    <input name="gender" type="radio" value="female">
+                    <span class="black-text">Female</span>
+                 </label>
+             </p>
+             
+        </div>
+        
+        <div class="row">
+            <div class="input-field col s12 m6">
+                 <i class="material-icons prefix">lock</i>
+                 <input id="password" type="password" name="password" class="validate" required> 
+                 <label for="password">Password</label>
+             </div>
+
+             <div class="input-field col s12 m6"> 
+                <i class="material-icons prefix" >lock_open</i>
+                <input id="conpwd" type="password" class="validate" required> 
+                <label for="conpwd">Confirm Password</label> 
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12 m6">
+                <i class="material-icons prefix" style="margin-left:-118px;">telephone</i>
+                 <input id="number" type="number" name="mobile" class="validate" required> 
+                 <label for="number">Contact Number</label>
+            </div>
+            <div class="input-field col s5">
+                <textarea id="textarea1" class="materialize-textarea validate" name="address" required></textarea>
+                <label for="textarea1">Address</label>
+            </div>
+                <div class="section"></div>
+              <a id="gps" class="btn-floating waves-effect waves-red green"><i class="material-icons">location_on</i></a>
+
+        </div>
+            <p class="center">
+                <label>
+                <input type="checkbox" id="test5">
+                <span>Send SMS too for future notifications</span>
+                </label>
+            </p>
+        
+        <div class="row center section">
+            <button class="btn-large waves-effect waves-light red accent-3 " id="signbtn" type="submit" name="action">
+                Sign Up
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </form>
+</div>
+
+
+
+
+        <div class="row section">
+            <div class="divider col s4" id="line"></div>
+            <p class="col s4 light center flow-text" id="conn">Or sign up using</p>
+            <div class="divider col s4" id="line"></div>
+        </div>
+
+         <div class="row">
+            <a  class="col s12 l6 push-l3 btn-large red waves-effect">
+                <I class="fa fa-google-plus left flow-text"  style="margin-right: -13px"></I>
+                Google</a>
+        </div>
+
+        <div class="row">
+            <a href="/auth/facebook" class="col s12 l6 push-l3 btn-large blue waves-effect">
+                <I class="fa fa-facebook-square left"  style="margin-right: -13px"></I>
+                Facebook</a>
+        </div>
+
+
+{{> footer}}
+  <!--  Scripts-->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/materialize.js"></script>
+  {{!-- <script src="js/init.js"></script> --}}
+  <script type="text/javascript">
+    // $(document).ready(function () {
+        
+        function isEmail(email) {
+			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			return regex.test(email);
+		}	
+
+        function isPassword(pwd) {
+			var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,19}$/;
+			return regex.test(pwd);
+		}
+        
+        function checkUpper(pwd){
+            var regex = /([A-Z])/;
+            return regex.test(pwd);
+        }
+
+
+        function checkLower(pwd){
+            var regex = /([a-z])/;
+            return regex.test(pwd);
+        }
+
+        function checkDig(pwd){
+            var regex = /([0-9])/;
+            return regex.test(pwd);
+        }
+        
+        $('#password').change(function(){
+            if(isPassword($('#password').val())==false){
+                M.toast({html:"<span>Password is incorrect</span>",displayLength:5000});
+                if(checkUpper($("#password").val())==false){
+                    setTimeout(function() {
+                    M.toast({html:"<span class='red-text' style='font-weight:600;'>Must have atleast 1 uppercase</span>",displayLength:5000});    
+                    }, 600);
+                }
+                if(checkLower($("#password").val())==false){
+                    setTimeout(function() {
+                    M.toast({html:"<span class='red-text' style='font-weight:600;'>Must have atleast 1 lowercase</span>",displayLength:5000});    
+                    }, 500);
+                }
+                if(checkDig($("#password").val())==false){
+                    setTimeout(function() {
+                    M.toast({html:"<span class='red-text' style='font-weight:600;'>Must have atleast 1 digit</span>",displayLength:5000});    
+                    }, 400);
+                }
+            }
+        });
+
+        $('#conpwd').change(function(){
+            if($("#conpwd").val() != $("#password").val()){
+                M.toast({html:"<span class='red-text ' style='font-size:26px;font-weight:bold;'>Passwords doesn't match</span>",displayLength:5000});    
+            }
+        });
+        
+        var radiochecked=0;
+        $(':radio').click(()=>{
+            radiochecked = 1;
+        });
+        
+        $('*').change(function(){
+        if(isPassword($('#password').val())==true && 
+            $("#conpwd").val() == $("#password").val() &&
+            $("#first_name").val() != '' &&
+            $("#last_name").val() != '' &&
+            isEmail($('#email').val()) ==true &&
+            $("#number").val() != '' &&
+            radiochecked ){
+            $("#signbtn").removeClass('red');
+            $("#signbtn").addClass('green');
+            $("#signbtn").addClass('pulse');
+            }
+        });
+
+        var lat,lng,myPos;
+
+
+        navigator.geolocation.getCurrentPosition(function(position){
+             lat = position.coords.latitude;
+             lng = position.coords.longitude;
+             console.log(lat,lng);
+        },function(err){
+            console.log("Unable to fetch current location",err);
+        });
+
+        $("#gps").click(function(){
+
+        $.ajax({
+            url: "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&key=AIzaSyCRN9-p6ar20bPGWTZUvFsCUOFxqCD_U24",
+            type: "GET",
+            success: function(data){
+                console.log(data.results[0].formatted_address);
+                myPos = data.results[0].formatted_address;
+                $("#textarea1").text(myPos);
+                M.textareaAutoResize($('#textarea1'));
+                M.updateTextFields();
+            }
+        })
+        
+        });
+  </script>
+  </body>
+</html>

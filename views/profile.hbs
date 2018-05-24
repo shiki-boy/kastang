@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/ms-icon-310x310.png">
+    <title>KasTang</title>
+
+    <!-- CSS  -->
+    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/my-css.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/animate.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+<style type="text/css">
+    div.tabs-content.carousel.initialized {
+        height: 24em !important;
+    }
+
+    
+    html,body,.block{
+        height: 100%;
+    }
+    
+</style>
+
+
+<body  id="whole" class="animated fadeIn">
+
+
+{{> navbar}}
+
+
+    <div class="card-panel grey lighten-5 z-depth-2">
+        <div class="row valign-wrapper">
+            <div class="col s2">
+                <img src="images/myphoto.jpeg" alt="you" class="responsive-img z-depth-4" style="border-radius: 49px;">
+            </div>
+            <div class="col s10">
+                <span class="teal-text">
+                    <h3 class="">Raghav Kaushik</h3>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container center">
+
+        <ul class="collapsible popout" data-collapsible="expandable">
+            <li>
+                <div class="collapsible-header red">
+                    <h3 class="white-text" style="margin: 0 auto;">Shopping Cart</h3>
+                </div>
+                <div class="collapsible-body red lighten-2">
+                    <ul class="collection z-depth-2" style="margin: 50px;border-radius: 23px;">
+                        {{#each cartProducts.cart}}
+                        <li class="collection-item avatar">
+                            <i class="material-icons circle green">insert_chart</i>
+                            <span class="title teal-text">{{this}}</span>
+                            <p>First Line</p>
+                            <a class="delete secondary-content">
+                                <i class="material-icons">delete</i>
+                            </a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header blue">
+                    <h3 class="white-text" style="margin: 0 auto;">Saved</h3>
+                </div>
+                <div class="collapsible-body">
+                    <span>Lorem ipsum dolor sit amet.</span>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header purple">
+                    <h3 class="white-text" style="margin: 0 auto;">My Orders</h3>
+                    <div class="collapsible-body">
+                        <span>Lorem ipsum dolor sit amet.</span>
+                    </div>
+            </li>
+        </ul>
+
+        </div>
+
+
+
+    {{> footer}}
+
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+
+    <script type="text/javascript">
+
+        var current = "cart";
+        var cart_items;
+
+        $(document).ready(() => {
+
+
+
+
+            $(".delete").click(function () {
+                var c = $(this).siblings();
+                c = c[1].innerText;
+
+                var link = encodeURIComponent(c);
+                console.log(link);
+                $.get(`/deleteFromCart/${link}`, (data, status) => {
+                    if (status == 'success') {
+                        $(this).parent().addClass('animated zoomOutDown');
+                        setTimeout(() => {
+                            $(this).parent().remove();
+                        }, 900);
+                    }
+                });
+            });
+
+
+            var before = $(window).scrollTop(), after;
+            $(window).scroll(function () {
+                after = $(window).scrollTop();
+                if (after > before) {
+                    $('nav ').removeClass('slideInDown ');
+                    $('nav ').addClass('slideOutUp ');
+                }
+                else{
+                    $('nav ').removeClass('slideOutUp ');
+                    $('nav ').addClass('slideInDown ');
+                }
+                before = $(window).scrollTop();
+            });
+
+
+        });
+
+
+
+
+    </script>
+
+
+</body>
+
+
+
+</html>

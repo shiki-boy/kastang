@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Log in Page</title>
+
+    <!-- CSS  -->
+    <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+<style>
+   
+</style>
+
+<body>
+
+    <h2 class="light center section">Change your password here.</h2>
+
+    {{!-- <div class="row "> --}}
+        <form action="/changepwd" method="POST">
+        <div class="row">
+
+            <div class="input-field  col s12 l6 push-l3">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="email" type="email" name="email" class="validate" required>
+                <label for="email" class="flow-text">email</label>
+                <p style="margin-top:-14px;margin-left:34px;opacity:0.7;">Enter your Valid Email</p>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="input-field  col s12 l6 push-l3">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="password" type="password" name="password" class="validate" required>
+                <label for="password" class="flow-text">New Password</label>
+                <p style="margin-top:-14px;margin-left:34px;opacity:0.7;">Enter your new password</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field  col s12 l6 push-l3">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="confirm_password" type="password" name="confirm_password" class="validate" required>
+                <label for="confirm_password" class="flow-text">Confirm Password</label>
+                <p style="margin-top:-14px;margin-left:34px;opacity:0.7;">Confirm Password</p>
+            </div>
+        </div>
+        <div class="row center">
+            <button class="btn waves-effect green" style="border-radius: 10px;" type="submit" name="action">submit
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+        </form>
+    {{!-- </div> --}}
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+
+</body>
+
+</html>

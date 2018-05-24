@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/ms-icon-310x310.png">
+  <title>KasTang</title>
+
+  <!-- CSS  -->
+  <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+  <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/logo.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/my-css.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/animate.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+</head>
+
+<style type="text/css">
+  img.responsive-img {
+    height: -webkit-fill-available;
+  }
+  .heart{
+    text-shadow: rgba(100, 0, 0, 0.44) 0px 2px 7px;
+  }
+  .cart{
+    text-shadow: -2px 2px 5px rgba(125,56,20,0.25);
+  }
+</style>
+
+
+<body id="whole" class="animated fadeIn">
+
+  {{> navbar}} {{> searchbar}}
+
+
+  <div class="row" style="position:absolute; width: 37% !important;">
+    <div id="filterbar" class="col hide-on-small-only m5" style="opacity:0.85;">
+      <ul class="collapsible z-depth-4" data-collapsible="accordion">
+        <li>
+          <div class="filter collapsible-header green accent-4">
+            <i class="material-icons">stars</i>By Brands</div>
+          <div class="collapsible-body">
+            {{#each brands}}
+            <p>
+              <label>
+                <input type="checkbox" class="filled-in" value="{{ this }}" />
+                <span class="black-text">{{ this }}</span>
+              </label>
+              {{!--
+              <label for="{{ this }}-check" style="color:black;">{{ this }}</label> --}}
+            </p>
+            {{/each }}
+          </div>
+        </li>
+        <li>
+          <div class="filter collapsible-header purple lighten-2">
+            <i class="material-icons">sort</i>Sort By</div>
+          <div class="collapsible-body">
+            <p>
+              <label>
+                <input class="with-gap" name="group1" type="radio" id="pop-check" />
+                <span class="black-text">Popularity</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input class="with-gap" name="group1" type="radio" id="high-check" />
+                <span class="black-text">Price: Low to High</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input class="with-gap" name="group1" type="radio" id="low-check" />
+                <span class="black-text">Price: High to Low</span>
+              </label>
+            </p>
+          </div>
+        </li>
+        <li>
+          <div class="filter collapsible-header">
+            <i class="material-icons">call_made</i>Price Range</div>
+          <div class="collapsible-body">
+            <div class="input-field">
+              <input id="price-from" type="number" class="">
+              <label for="price-from">From</label>
+            </div>
+            <div class="input-field">
+              <input id="price-to" type="number" class="">
+              <label for="price-to">To</label>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+
+  <div class="row container">
+    {{#each results}}
+    <div class="col l4">
+      {{makeCard Cname Pname price discount}}
+    </div>
+    {{/each}}
+    <div class="placehere"></div>
+  </div>
+
+
+  <div class="section container center">
+    <a class="waves-effect waves-light btn" onclick="getMore();">More</a>
+  </div>
+
+  {{> backtotop }}
+
+  <div class="section"></div>
+  <div class="section"></div>
+  {{> footer}} {{!-- Scripting --}}
+  <script src="js/jquery.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/my-script.js"></script>
+  
+
+  <script type="text/javascript">
+
+    function c() {
+      console.log('sending...');
+      $.ajax({
+        url: '/c',
+        method: "POST",
+        success: function (data) {
+          var elements = $('.card');
+          console.log(data)
+          for (i = 0; i < elements.length; i++) {
+            var card = elements[i];
+            var name = $(card)["0"].children[1].children["0"].innerText;
+            if (data.cart.includes(name)) {
+              $(card)["0"].children[1].children[3].children["0"].style.color = "#ec41d6 ";
+            }
+            if (data.saved.includes(name)) {
+              $(card)["0"].children[1].children[6].children["0"].style.color = "red";
+            }
+          }
+        }
+      });
+    }
+
+    
+    
+    var brands = [];
+    var j = 0;
+    var context = [];
+    var count = 1;
+    var type = document.location.href.split('/');
+    type = type[type.length - 1];
+
+    function getMore() {
+      $.ajax({
+        url: "/paginate",
+        type: "POST",
+        data: { count, type },
+        success: function (data) { 
+          //console.log(data);
+          count++;
+          for (var x in data) {
+            var Cname = data["" + x].Cname;
+            var Pname = data["" + x].Pname;
+            var price = data["" + x].price;
+            var discount = data["" + x].discount;
+
+            var name = Cname + "-" + Pname;
+            var title = Cname + ' ' + Pname;
+            var linkName = encodeURIComponent(name);
+
+            var card = `
+          <div class="col l4">
+            <div class="card medium z-depth-2 hoverable">
+              <div class="card-image waves-effect waves-light">
+                <a href="/buy/${linkName}">
+                  <img class='responsive-img' src='/images/${name}-1.jpg' 'alt='img'>
+                </a>
+              </div>
+              <div class="card-content white-text">
+                <p class="card-title center-align flow-text black-text" style="font-size:144%;">${title}</p>`;
+            if (discount == 0) {
+              card += `
+                    <p class="center-align teal-text" style="font-size: 21px;">&#8377 ${price}</p>`;
+            }
+            else {
+              var PRICE = price.split(',').join('');
+              PRICE = parseFloat(PRICE);
+              var DISCOUNT = parseFloat(discount);
+              var netPrice = PRICE - PRICE * DISCOUNT * 0.01;
+              netPrice = parseInt(netPrice);
+              netPrice = new Number(netPrice);
+              // console.log(netPrice.toLocaleString('en-IN'));
+              card += `
+                      <p class="center-align teal-text" style="font-size: 21px;"><span class="discount-on-mrp">&#8377 ${price}</span>
+                      <span class="discount center">&#8377 ${netPrice.toLocaleString('en-IN')}</span>
+                      <br>
+                      <span class="new green badge" data-badge-caption="off">${discount}%</span></p>`;
+            }
+            card += `
+                    <hr>
+                    <p class='black-text' style="float: left;margin-left: 47px;">
+                    <a class="btn-flat cart tooltipped" onclick="addToCart(this);"  data-position="bottom" data-delay="1500" data-tooltip="Add to cart">
+                    <i class="material-icons">shopping_cart</i></a>
+                    <p class='black-text ' style="float: left;">
+                    <a class="btn-flat info activator tooltipped" onclick="getInfo(this);" data-position="bottom" data-delay="1500" data-tooltip="Show Info">
+                    <i id="card-info" class="material-icons">info_outline</i></a>
+                    </p>
+                    </p>
+                <p class='black-text' style="float: left;margin-right: -23px;">
+                <a class="btn-flat heart tooltipped" onclick="addToSaved(this);" data-position="bottom" data-delay="1500" data-tooltip="Add to Favorites">
+                <i class="material-icons">favorite</i></a>
+                </p>
+                </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">${name}
+                  <i class="material-icons right">close</i>
+                </span>
+                <div id="placehere"></div>
+              </div>
+              </div>
+            </div>`;
+
+            $(".placehere").before(card);
+          }
+
+        }
+      });
+      c();
+    }
+
+    function addToSaved(el) {
+       if ($(el)["0"].style.color == "black" || $(el)["0"].style.color == "") {
+          $(el)["0"].style.color = '#ff1744';
+          //$('i', el).toggleClass('red-text text-accent-3');
+          $(el).toggleClass("animated flip");
+
+          var name = $(el).parent().siblings();
+          name = name[0].innerText;
+          link = encodeURIComponent(name);
+
+            $.ajax({
+              url: `/addToSaved/${link}`,
+              type: 'GET',
+              success: function (data) {
+                M.toast({ html: '<span>Added to saved</span>', displayLength: 8000 });
+              },
+              error: function () {
+                $("#whole").css('-webkit-animation-duration', '2.8s');
+                $("body").addClass('hinge');
+                setTimeout(() => {
+                  window.open('/error', "_self");
+                }, 3000);
+              }
+            });
+        }
+        else{
+          $(el)["0"].style.color = "black";
+          $(el).toggleClass("animated flip");
+          var name = $(el).parent().siblings();
+          name = name[0].innerText;
+          $.ajax({
+            url: '/removeFromSaved',
+            method: "POST",
+            data: { product: name },
+            success: function () {
+              M.toast({ html: '<span class="teal-text" id="my-remove-toast">Removed from saved</span>', displayLength: 8000 });
+              $("#my-remove-toast").parent().css({ 'background': 'antiquewhite', 'font-weight': '400' });
+            }
+          });
+       }
+
+      }
+
+    function addToCart(el) {
+      if ($(el)["0"].style.color == "black" || $(el)["0"].style.color == "") {
+        $(el)["0"].style.color =  "#ec41d6";
+        $(el).toggleClass("animated rubberBand");
+
+        var name = $(el).parent().siblings();
+        name = name[0].innerText;
+        link = encodeURIComponent(name);
+
+        $.ajax({
+          url: `/addToCart/${link}`,
+          type: 'GET',
+          success: function (data) {
+            M.toast({ html: '<span>Added to cart</span>', displayLength: 8000 });
+          },
+          error: function () {
+            $("#whole").css('-webkit-animation-duration', '2.8s');
+            $("body").addClass('hinge');
+            setTimeout(() => {
+              window.open('/error', "_self");
+            }, 3000);
+          }
+      });
+      }
+      else{
+        $(el)["0"].style.color = 'black';
+        $(el).toggleClass("animated rubberBand");
+        var name = $(el).parent().siblings();
+        name = name[0].innerText;
+        console.log('io')
+        $.ajax({
+          url: '/removeFromCart',
+          method: "POST",
+          data: {product:name},
+          success: function(){
+            M.toast({ html: '<span class="teal-text" id="my-remove-toast">Removed from cart</span>', displayLength: 8000 });
+            $("#my-remove-toast").parent().css({'background':'antiquewhite','font-weight':'400'});
+          }
+        });
+      }
+    }
+
+    function getInfo(el) {
+      var card_info = $(el).parent().parent().siblings()[1].children[1];
+      if (card_info.innerHTML == "") {
+        var name = $(el).parent().siblings();
+        name = name[0].innerText;
+        //console.log(name.split('-'));
+        link = encodeURIComponent(name);
+
+        $.ajax({
+          url: `getInfo/${link}`,
+          type: "GET",
+          success: function (data) {
+            //console.log(data); 
+            for (var key in data) {
+              card_info.innerHTML += `<p>${key}: ${data[key]}</p>`;
+            }
+          }
+
+        });
+      }
+    }
+
+    $(document).ready(() => {
+      c();
+      $('.collapsible').collapsible();
+
+      
+
+
+      $(":checkbox").click(function () {
+        var name = $(this).val();
+        var already = 0;
+        for (n in brands) {
+          if (name == brands[n]) {
+            already = 1;
+            brands.splice(n, 1);
+            break;
+          }
+        }
+        if (!already)
+          brands.push(name);
+      });
+
+      
+
+      $(":checkbox").click(function () {
+        $(".card-title").parent().parent().parent().css('display', 'none');
+        $(".card-title").parent().parent().parent().addClass('animated');
+        if (brands.length == 0) {
+          $(".l4").css('display', 'block');
+          $(".card-title").parent().parent().parent().addClass('flipInX');
+        }
+        $(".card-title").each(function (index, element) {
+          var current = element.innerHTML.split('-');
+          for (brand in brands) {
+            if ($.inArray(brands[brand], current) != -1) {
+              $(element).parent().parent().parent().addClass('flipInX');
+              $(element).parent().parent().parent().css('display', 'block');
+            }
+          }
+
+        });
+      });
+
+    });
+
+  </script>
+
+</body>
+
+</html>

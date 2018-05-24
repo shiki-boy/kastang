@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/ms-icon-310x310.png">
+    <title>KasTang</title>
+
+    <!-- CSS  -->
+    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/my-css.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/animate.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+<style>
+    body {
+        background: cornflowerblue;
+    }
+
+    .input-field .prefix.active {
+        color: rgb(255, 255, 255) !important;
+    }
+
+    /* label color */
+
+    .input-field label, .input-field input[type=text] {
+        color: #000;
+    }
+
+    /* label focus color */
+
+    .input-field input[type=text]:focus+label, .input-field input[type=password]:focus+label {
+        color: #000 !important;
+    }
+
+    /* label underline focus color */
+
+    .input-field input[type=text]:focus, .input-field input[type=password]:focus  {
+        border-bottom: 1px solid rgb(255, 255, 255) !important;
+        box-shadow: 0 1px 0 0 rgb(252, 252, 252) !important;
+    }
+</style>
+
+<body>
+    <div class="section"></div>
+    <div class="section"></div>
+    <div class="section"></div>
+    <div class="container row">
+        <div class="col s8 push-s2">
+            <div class="card-panel teal z-depth-3">
+                <form action="" method="POST">
+                    <div class="row">
+                        <h4 class="white-text center-align">
+                            <i class="fa fa-wrench" style='text-shadow: 0px 2px black;' aria-hidden="true"></i>
+                            Admin Sign in</h4>
+                        <div class="divider"></div>
+                        <div class="section"></div>
+                        <div class="input-field col s8 offset-s1" style="width: 76%;">
+                            <i class="material-icons prefix black-text">account_circle</i>
+                            <input id="user" type="text" class="validate white-text" required>
+                            <label for="user">User Id</label>
+                        </div>
+                        <div class="input-field col s8 offset-s1" style="width: 76%;margin-top: 32px;">
+                            <i class="material-icons prefix black-text">lock</i>
+                            <input id="password" type="password" class="validate white-text" required>
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+                    <div class="row container center">
+                        <button type="submit" class="col s5 push-s6 waves-effect btn-large green darken-1"
+                                style="border-radius: 13px;">
+                            <i class="material-icons right">send</i>sign in</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/velocity.min.js"></script>
+    <script src="js/init.js"></script>
+</body>

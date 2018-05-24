@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/ms-icon-310x310.png">
+    <title>KasTang</title>
+
+    <!-- CSS  -->
+    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/my-css.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/animate.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+<style type="text/css">
+    .nav-title {
+        text-shadow: 6px 4px 10px black;
+        font-family: consolas;
+        letter-spacing: 5px;
+    }
+
+    .brand {
+        width: 75px;
+        border-radius: 54px;
+        transition: all 300ms;
+        animation-duration: 750ms;
+    }
+
+    .brand:hover {
+        box-shadow: 0px 1px 3px 0px black;
+    }
+
+    .revenue {
+        box-shadow: inset -1px -3px 77px -18px black;
+    }
+
+    .clicked {
+        border-left-style: inset;
+        border-left-width: 5px;
+        border-left-color: springgreen;
+        transition: all 300ms;
+        font-size: x-large;
+    }
+
+    .fa-pencil {
+        color: #ac6a0b;
+    }
+
+    .fa-trash {
+        color: red;
+    }
+
+    input-field label {
+        color: black;
+    }
+</style>
+
+<body>
+
+    <!-- ================================ CATEGORIES HELP MODAL ==================================== -->
+
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Categories: Used for search </h4>
+            <p class="red-text text-darken-3">Put your special features seprated by a space.</p>
+            <p>Eg . laptop developer standard gaming 5 star mobile 4k tv</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+    </div>
+
+    <!-- =========================================================================================== -->
+
+
+    <!-- ====================================  UPDATE MODAL =========================================== -->
+
+    <div id="modal2" class="modal modal-fixed-footer" style="width: 70em;">
+        <div class="modal-content">
+            <h4 class="green-text center-align light">Update Product</h4>
+            <div class="row">
+                <div class="input-field col s3">
+                    <input id="u_company" name="u_company" type="text">
+                    <label for="u_company">Company</label>
+                </div>
+                <div class="input-field col s3">
+                    <input id="u_name" name="u_name" type="text">
+                    <label for="u_name">Name</label>
+                </div>
+                <div class="input-field col s3">
+                    <input id="u_price" name="u_price" type="text">
+                    <label for="u_price">Price</label>
+                </div>
+                <div class="input-field col s3">
+                    <input id="u_discount" name="u_discount" type="number">
+                    <label for="u_discount">Discount</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s8">
+                    <textarea id="u_categories" name="u_categories" class="materialize-textarea"></textarea>
+                    <label for="u_categories">Categories</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <h4 class="teal-text">Specifications :</h4>
+                <textarea id="u_info" style="height: 17em;"></textarea>
+            </div>
+                
+
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="u_save modal-action modal-close waves-effect waves-green btn-flat green-text text-darken-2">Save</a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
+        </div>
+    </div>
+
+    <!-- ======================================================================================= -->
+
+
+    <!-- ===================================== PRODUCT ADDED MODAL =================================== -->
+
+    <div id="modal_addedProd" class="modal">
+        <div class="modal-content">
+            <h4 class="center-align">Product Added Successfully</h4>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+        </div>
+    </div>
+
+    <!-- =============================================================================================== -->
+
+
+    <!-- ======================================= NAVBAR ============================================== -->
+
+    <nav class="nav-extended red accent-3">
+        <div class="nav-wrapper">
+            <a href="javascript:delay('/home', 900)" class="brand-logo">
+                <img class="brand animated" src="/images/ms-icon-310x310.png" alt="">
+            </a>
+            <ul class="right hide-on-med-and-down">
+                <li>
+                    <a class="tooltipped waves-effect" data-position="left" data-delay="700" data-tooltip="Refresh">
+                        <i class="material-icons white-text">autorenew</i>
+                    </a>
+                </li>
+                <li>
+                    <a class="tooltipped waves-effect" data-position="left" data-delay="700" data-tooltip="Sign out">
+                        <i class="fa fa-sign-out fa-2x white-text" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="nav-content center">
+            <span class="nav-title">
+                <i class="fa fa-wrench" style='text-shadow: 0px 2px black;' aria-hidden="true"></i>
+                Admin Panel
+            </span>
+            <a class="down btn-floating btn-large halfway-fab waves-effect waves-light teal">
+                <i class="material-icons">arrow_upward</i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- ================================================================================================ -->
+
+
+
+    <!-- ==================================== DIV FOR TABS ==================================== -->
+
+    <div class="row section">
+        <!-- MAIN CONTAINER DIV START -->
+
+        <div class="col s12">
+            <!-- heading for tabs div -->
+            <ul class="tabs">
+                <li class="tab col s3">
+                    <a class=" waves-effect waves-green" href="#dash">Dashboard</a>
+                </li>
+                <li class="tab col s3">
+                    <a class="active waves-effect waves-green" href="#product">Products</a>
+                </li>
+                <li class="tab col s3">
+                    <a class=" waves-effect waves-green" href="#ord">Orders</a>
+                </li>
+                <li class="tab col s3">
+                    <a class=" waves-effect waves-green" href="#cust">Customers</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="dash" class="col s12">
+            <!-- dashboard div start -->
+
+            <div class='section'></div>
+
+            <div class="row">
+                <div class="col m4">
+                    <div class="card teal">
+                        <div class="card-content revenue">
+                            <h4 class="white-text center-align">Revenue</h4>
+                        </div>
+                        <div class="card-tabs">
+                            <ul class="tabs tabs-fixed-width">
+                                <li class="tab">
+                                    <a class='active' href="#rev-today">Today</a>
+                                </li>
+                                <li class="tab">
+                                    <a href="#rev-month">monthly</a>
+                                </li>
+                                <li class="tab">
+                                    <a href="#rev-total">total</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-content grey lighten-4">
+                            <div id="rev-today">Test 1</div>
+                            <div id="rev-month">Test 2</div>
+                            <div id="rev-total">Test 3</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col m4">
+                    <div class="card deep-purple">
+                        <div class="card-content revenue">
+                            <h4 class="white-text center-align">New Orders</h4>
+                        </div>
+                        <div class="card-tabs">
+                            <ul class="tabs tabs-fixed-width">
+                                <li class="tab">
+                                    <a class='active' href="#ord-today">Today</a>
+                                </li>
+                                <li class="tab">
+                                    <a href="#ord-month">monthly</a>
+                                </li>
+                                <li class="tab">
+                                    <a href="#ord-total">total</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-content grey lighten-4">
+                            <div id="ord-today">Test 1</div>
+                            <div id="ord-month">Test 2</div>
+                            <div id="ord-total">Test 3</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col m4">
+                    <div class="card blue">
+                        <div class="card-content revenue">
+                            <h4 class="white-text center-align">Community</h4>
+                        </div>
+                        <div class="card-tabs">
+                            <ul class="tabs tabs-fixed-width">
+                                <li class="tab">
+                                    <a class='active' href="#comm-today">Customers</a>
+                                </li>
+                                <li class="tab">
+                                    <a href="#comm-month">Reviewers</a>
+                                </li>
+                                <li class="tab">
+                                    <a href="#comm-total">total</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-content grey lighten-4">
+                            <div id="comm-today">Test 1</div>
+                            <div id="comm-month">Test 2</div>
+                            <div id="comm-total">Test 3</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+
+
+        <div id="product" class="col s12">
+            <!-- product div start  -->
+            <div class="section"></div>
+
+            <div style="float: left;">
+                <a class="animated waves-effect waves-teal btn-flat btn-large product-select yellow clicked" state='clicked' id="new-prod"
+                    style="font-family: monospace;">new product
+                </a>
+                <br>
+                <a class="animated waves-effect waves-teal btn-flat btn-large product-select amber lighten-4" state='not' id="all-prod" style="font-family: monospace;">my products
+                </a>
+                <!-- 2 side buttons for product  -->
+            </div>
+
+            <!-- ================================= NEW PRODUCT FORM =============================== -->
+            <form action="/test" method="POST" id="all-prod-data" style="display: none;">
+                <div class="row">
+                    <div class="input-field col s3 push-s1">
+                        <input name="company" type="text" class="validate" required>
+                        <label for="company" data-error="Name is reqd.">Company</label>
+                    </div>
+                    <div class="input-field col s3 push-s1">
+                        <input name="product_name" type="text" class="validate" required>
+                        <label for="product_name" data-error="Name is reqd.">Product Name</label>
+                    </div>
+                    <div class="input-field col s3 push-s1">
+                        <input name='price' type="text" class="validate" required>
+                        <label for="price">Price</label>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: -41px;margin-right: 26px;">
+                    <div class="input-field col s3 right ">
+                        <input name='discount' type="number" class="validate" required>
+                        <label for="discount">Discount</label>
+                    </div>
+                </div>
+
+                <div class="row container  right">
+                    <div class="input-field col s6 push-s2">
+                        <textarea id="categories" name="categories" class="materialize-textarea"></textarea>
+                        <label for="categories">Categories</label>
+                    </div>
+                    <a class="right waves-effect waves-teal btn-flat modal-trigger" href="#modal1" style="right: 210px;top: 48px;">
+                        <i class="material-icons" style="font-size: 28px;">help</i>
+                    </a>
+
+                </div>
+
+                <div class="row">
+                    <h4 class="center teal-text col s5" style="font-family: monospace;">Specifications :</h4>
+                </div>
+
+
+                <div class="container">
+                    <ul class="collapsible" data-collapsible="expandable">
+                        <a class="left btn-floating blue add-heading" number="1" onclick="addHeading(this);">
+                            <i class="material-icons">add</i>
+                        </a>
+                        <li>
+                            <div class="collapsible-header">
+                                <!-- Heading -->
+                                <div class="input-field col s9" style="margin-left:0;">
+                                    <input value="General" name="heading-1" type="text" class="validate" style="font-size: xx-large;" required>
+                                    <label for="heading-1">Heading</label>
+                                </div>
+                            </div>
+
+                            <div class="collapsible-body">
+                                <div class="row">
+
+                                    <div class="input-field col s4 center">
+                                        <input name="key-1.1" type="text" class="validate" required>
+                                        <label for="key-1.1">Key</label>
+                                    </div>
+                                    <div class="input-field col s4 center">
+                                        <input name="value-1.1" type="text" class="validate" required>
+                                        <label for="value-1.1">Value</label>
+                                    </div>
+
+                                    <a class="right btn-floating red add-kv" headingN="1" i="1" onclick="addKv(this);">
+                                        <i class="material-icons">add</i>
+                                    </a>
+                                </div>
+                                <div id="place-kv-here-1"></div>
+                            </div>
+                        </li>
+                        <div id="place-heading-here"></div>
+
+                    </ul>
+                    <button class="waves-effect waves-orange btn-large right green" onclick="addNew();" type="submit" style="border-radius: 12px;">+add product</button>
+                </div>
+            </form>
+
+
+            <!-- =================================== UPDATE PRODUCT ================================== -->
+            <div id="new-prod-data">
+                <div class="container">
+                    <div class="row">
+                        <div class="input-field col s6 push-s3">
+                            <i class="material-icons prefix">search</i>
+                            <input id="search" name="search" type="search">
+                            <label for="search" style="color: black;">Search Products</label>
+                        </div>
+                    </div>
+                    <div class="section"></div>
+                    <hr class="col s12 push-s1" style="border-style: double;color: #224ec5b0;opacity: 0.7;
+                        box-shadow: 0px 8px 12px 0px rgba(43, 33, 179,0.8);">
+                    <div class="section"></div>
+                    <div class="section"></div>
+                    <div class="row center">
+
+                        <table class="col s12 push-s1 bordered highlight centered responsive-table" style="box-shadow: 5px 3px 25px -5px black;border-radius: 6px;">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Company</th>
+                                    <th>Price</th>
+                                    <th>Discount%</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <tr>
+                                    <td>Ideapad</td>
+                                    <td>Lenovo</td>
+                                    <td>46,000</td>
+                                    <td>5</td>
+                                    <td>
+                                        <span class="">
+                                            <a class="btn-flat modal-trigger update_prod"  href="#modal2" style="padding-left: 0;padding-right: 12px;">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </a>
+                                            <a class="btn-flat delete_prod" style="padding-left: 0;padding-right: 7px;">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </span>
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>Spectre</td>
+                                    <td>HP</td>
+                                    <td>1,12,000</td>
+                                    <td>7</td>
+                                    <td>
+                                        <span class="">
+                                            <a class="btn-flat modal-trigger update_prod" href="#modal2" style="padding-left: 0;padding-right: 12px;">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </a>
+                                            <a class="btn-flat delete_prod" style="padding-left: 0;padding-right: 7px;">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </span>
+                                    </td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="ord" class="col s12">Test 3</div>
+    <div id="cust" class="col s12">Test 4</div>
+
+
+    </div>
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/velocity.min.js"></script>
+     <script>
+        var i = 0;
+        var position = 1;
+        var pos_in_mod = 1;
+        var product = null;
+        
+        function delay(url,time){
+            setTimeout(()=>{window.location = url},time);
+        }
+        
+        $("#all-prod-data").submit(function(event){
+            event.preventDefault();
+            console.log('ho');
+                if( $("input[name='company'").val() == '' || 
+                $("input[name='product_name'").val() == '' ||
+                $("input[name='price'").val() == '' || 
+                $("input[name='discount'").val() == '' ||
+                document.getElementById('categories').value == '' ){
+                    alert('some fields are empty');
+                    return ;
+                }
+            else{
+
+                $.ajax({
+                    url: $("#all-prod-data").attr('action'),
+                    method: "POST",
+                    data: $("#all-prod-data").serialize(),
+                    success: function(data, status){
+                        if (data != 'done') {
+                            alert('error');
+                        }
+                        else {
+                            $("#modal_addedProd").modal('open');
+                            console.log(data, status);
+                        }
+                    } 
+                });
+                
+            }
+        });
+
+        
+
+        $(document).ready(function () {
+            
+            $('.tabs').tabs();
+
+            $('.collapsible').collapsible();
+
+            $('#modal1').modal();
+            $('#modal2,#modal_addedProd').modal({
+                dismissible: false, // Modal can be dismissed by clicking outside of the modal
+                opacity: 0.8, // Opacity of modal background
+                inDuration: 300, // Transition in duration
+                outDuration: 200, // Transition out duration
+                startingTop: '4%', // Starting top style attribute
+                endingTop: '10%', // Ending top style attribute
+                ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+                    // console.log(modal, trigger);
+                },
+                complete: function () { } // Callback for Modal close
+            }
+            );
+
+
+
+            $('.down').click(function () {
+                document.getElementsByClassName('down')['0'].innerHTML = "";
+
+                if (i % 2 == 0) {
+                    document.getElementsByClassName('down')['0'].innerHTML += "<i class='material-icons'>arrow_downward</i>";
+                    $('nav').velocity({
+                        translateY: '-80%'
+                    }, 'spring'); i++;
+                }
+                else {
+                    document.getElementsByClassName('down')['0'].innerHTML += "<i class='material-icons'>arrow_upward</i>";
+                    $('nav').velocity('reverse'); i++;
+                }
+            });
+
+            $('.brand').click(function () {
+                $(this).toggleClass('flip');
+                setTimeout(() => {
+                    $(this).toggleClass('flip');
+                }, 1000);
+            });
+
+            $('.product-select').click(function () {
+                if ($(this).attr('state') == 'clicked') {
+                    console.log('c');
+                    return;
+                }
+                else {
+                    $(this).addClass('clicked bounceIn yellow');
+                    $(this).removeClass('amber lighten-4');
+                    $(this).attr('state', 'clicked');
+                    $(this).siblings().attr('state', 'not');
+                    $(this).siblings().addClass('amber lighten-4');
+                    $(this).siblings().removeClass('clicked bounceIn yellow');
+                }
+            });
+
+
+            $("#new-prod").click(function () {
+                $('#new-prod-data').show();
+                $('#all-prod-data').hide();
+            });
+
+            $("#all-prod").click(function () {
+                $('#all-prod-data').show();
+                $('#new-prod-data').hide();
+            });
+
+            $(".update_prod").click(function () {
+                alert();
+                var element = $(this).parent().parent().parent()["0"];
+                var Pname = element.cells["0"].innerText;
+                var Cname = element.cells["1"].innerText;
+                
+                    $.ajax({
+                        url: "/updateProduct",
+                        type: "POST",
+                        data: { Cname, Pname },
+                        success: function (data) {
+                            // console.log(data[1].info["0"]);
+                            $("#modal2").modal('open');
+                            $("#u_company").val(data["0"].Cname);
+                            $("#u_name").val(data["0"].Pname);
+                            $("#u_price").val(data["0"].price);
+                            $("#u_discount").val(data["0"].discount);
+                            var categories = '';
+                            for (x in data["0"].category) {
+                                categories += data["0"].category[x] + " ";
+                            }
+                            $("#u_categories").val(categories);
+
+                            var info = data[1].info["0"];
+                            console.log(info);
+                            
+                            $("#u_info").val(JSON.stringify(info,undefined,12));
+
+                            M.updateTextFields();
+                        }
+                    });
+            });
+
+
+        });
+
+
+        function addKv(el) {
+            var currentPos = $(el)["0"].attributes[1].value;
+            var i = $(el)["0"].attributes[2].value;
+            i++;
+            $(el).detach();
+            var html = `<div class="row">
+                            <div class="input-field col s4 center">
+                                <input name="key-${currentPos}.${i}" type="text">
+                                <label for="key-${currentPos}.${i}">Key</label>
+                            </div>
+                            <div class="input-field col s4 center">
+                                <input name="value-${currentPos}.${i}" type="text">
+                                <label for="value-${currentPos}.${i}">Value</label>
+                            </div>
+                                            
+                            <a class="right btn-floating red " headingN="${currentPos}" i="${i}" onclick="addKv(this);">
+                                <i class="material-icons">add</i>
+                                </a>
+                        </div>`;
+            $("#place-kv-here-" + currentPos).before(html);
+
+        }
+
+
+        function addHeading(el) {
+            // alert();
+            // var position = parseInt($(this)["0"].attributes[1].value);
+            $(el).hide();
+            position += 1;
+            var html = `<a class="left btn-floating blue add-heading" number="${position}" onclick="addHeading(this);">
+                                <i class="material-icons">add</i>
+                            </a>
+                            <li>
+                                <div class="collapsible-header">
+                                    <div class="input-field col s9" style="margin-left:0;">
+                                        <input name="heading-${position}" type="text" style="font-size: xx-large;">
+                                        <label for="heading-${position}">Heading</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="collapsible-body">
+                                    <div class="row">
+                                        <div class="input-field col s4 center">
+                                            <input name="key-${position}.1" type="text">
+                                            <label for="key-${position}.1">Key</label>
+                                        </div>
+                                        <div class="input-field col s4 center">
+                                            <input name="value-${position}.1" type="text">
+                                            <label for="value-${position}.1">Value</label>
+                                        </div>
+                                    </div>
+                                    <div id="place-kv-here-${position}"></div>
+                                
+                                        <a class="right btn-floating red" headingN="${position}" i="1" onclick="addKv(this);">
+                                            <i class="material-icons">add</i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>`;
+            $("#place-heading-here").before(html);
+        }
+
+        
+    </script>
+
+</body>
+
+</html>

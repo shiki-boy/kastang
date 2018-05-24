@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/ms-icon-310x310.png">
+  <title>KasTang</title>
+
+  <!-- CSS  -->
+  <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+  <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/my-css.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/animate.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+
+
+<style type="text/css"> 
+    .collection-item{
+        transition: all 420ms;
+    }
+    .collection-item:hover{
+        background: rgba(22, 34, 78, 0.2)!important;
+    }
+</style>
+
+
+<body id="whole" class="animated fadeIn">
+
+
+    {{> navbar}}
+
+    
+    <h1 class="center-align light teal-text z-depth-1" >My Cart</h1>
+    <div class="section"></div>
+    
+<ul class="collection z-depth-2" style="margin: 50px;border-radius: 23px;">
+    {{#each cartProducts.cart}}
+    <li class="collection-item avatar">
+      <i class="material-icons circle green">insert_chart</i>
+      <span class="title teal-text">{{this}}</span>
+      <p>First Line
+      </p>
+      <a class="delete secondary-content"><i class="material-icons">delete</i></a>
+    </li>
+    {{/each}}
+</ul>
+
+
+    {{> footer}}
+
+        {{!-- ------ SCRIPTING ------ --}}
+  <script src="js/jquery.min.js"></script>
+  <script src="js/handlebars.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  
+  <script type="text/javascript">
+    $(".delete").click(function(){
+       var c = $(this).siblings();
+       c = c[1].innerText;
+       
+       var link = encodeURIComponent(c);
+       console.log(link);
+        $.get(`/deleteFromCart/${link}`,(data,status)=>{
+            if(status == 'success'){
+                $(this).parent().addClass('animated zoomOutDown');
+                setTimeout(()=>{
+                    $(this).parent().remove();
+                },900);
+            }
+        });
+    });
+
+    console.log(JSON.stringify(data));
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+node_modules
+.vscode
+server.key
+%1.key
+package-lock.json

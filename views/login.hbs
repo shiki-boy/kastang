@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Log in Page</title>
+
+    <!-- CSS  -->
+    <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+
+<style type="text/css">
+    body{
+        background: white;
+    }
+
+    @keyframes bgchange{
+        0% {background: wheat}
+        10% {background: lightgray}
+        20% {background: bisque}
+        35% {background: antiquewhite}
+        60% {background: lightcyan}
+        100% {background: antiquewhite}
+
+    }
+    #line{
+        height: 2px;
+    }
+    #conn{
+        margin-top: -15px;
+        {{!--font-size: 18px;--}}
+    }
+</style>
+
+
+<body>
+
+
+
+    <nav>
+        <div class='nav-wrapper z-depth-3 green accent-3'>
+            <a href='#' class="brand-logo center white-text"> Log In </a>
+            <ul class='left hide-on-med-and-down'>
+            <li><a href="http://localhost:1234/home">
+                    <i class="material-icons prefix white-text">home</i>
+                </a>
+                </li>
+                <li><a>link2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<div class="section">
+
+
+    <form class="container" method="POST" action="/findUser">
+        <div class="row section">
+            <div class="input-field col s12 l6 push-l3">
+                <i class="material-icons prefix">email</i>
+                <input id="email" type="email" name="email" class="validate" required autofocus>
+                <label for="password">E-mail</label>
+                <p style="margin-top:-14px;margin-left:34px;opacity:0.7;">Enter your E-mail </p>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="input-field  col s12 l6 push-l3">
+                <i class="material-icons prefix">lock</i>
+                <input id="password" type="password" name="password" class="validate" required>
+                <label for="password" class="flow-text">Password</label>
+                <p style="margin-top:-14px;margin-left:34px;opacity:0.7;
+                     ">Enter your Password</p>
+            </div>
+        </div>
+
+        <div class="row section">
+            <div class="col s12 m6 l6 push-l3"><a style="margin-top:-14px;margin-left:34px;opacity:0.7;" href="/forgot">
+                FORGOT YOUR PASSWORD ?</a>
+            </div>
+        </div>
+
+        <div class="row section">
+            <div class="center switch">
+                <span>Keep me logged in</span>
+                <label>
+                <input type="checkbox" value="1" name='keepLoggedIn'>
+                <span class="lever"></span>
+              </label>
+            </div>
+        </div>
+
+
+
+        <div class="row section">
+            <div class="center">
+                <button class="btn btn-large center waves-effect waves-light red accent-1" id="logbtn" type="submit" name="action">
+               Log In
+                <i class="material-icons right">send</i>
+            </button>
+            </div>
+        </div>
+</div>
+
+
+ 
+        <div class="row section">
+            <div class="divider col s4" id="line"></div>
+            <p class="col s4 light center flow-text" id="conn">Or connect using</p>
+            <div class="divider col s4" id="line"></div>
+        </div>
+
+        <div class="row">
+            <a  class="col s12 l6 push-l3 btn-large red waves-effect">
+                <I class="fa fa-google-plus left flow-text"  style="margin-right: -13px"></I>
+                Google</a>
+        </div>
+        <div class="row">
+            <a  class="col s12 l6 push-l3 btn-large blue waves-effect">
+                <I class="fa fa-facebook-square left"  style="margin-right: -13px"></I>
+                Facebook</a>
+        </div>
+
+        <div></div>
+        
+        <div class="section"></div>
+        <div class="divider col l12"></div>
+        <div class="section"></div>
+        <div class="row section">
+            <a  class="col s12 l6 push-l3 btn-large green waves-effect" href="/signup">
+                <i class="material-icons left"  style="margin-right: -13px">create</i>
+                Create An Account</a>
+        </div>
+    </form>
+
+
+
+
+
+    {{> footer}}
+
+
+
+    <!--  Scripts-->
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+    <script type="text/javascript">
+        $(document).ready(()=>{
+            $("*").change(function(){
+                if($("#email").val() != '' &&
+                   $("#password").val() != ''){
+                       $("#logbtn").removeClass('red accent-1');
+                       $("#logbtn").addClass('green accent-3');
+                       $("#logbtn").addClass('pulse');
+                   }
+                else{
+                       $("#logbtn").removeClass('green accent-3');
+                       $("#logbtn").addClass('red accent-1');
+                       $("#logbtn").removeClass('pulse');
+                }
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+</body>
+
+</html>
