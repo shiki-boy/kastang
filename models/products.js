@@ -48,7 +48,9 @@ var BrandsSchema = new mongoose.Schema({
     ProductType: {
         type: String
     },
-    Companies:[String]
+    Companies:{
+        type: String
+    }
 });
 
 BrandsSchema.index({ProductType:"text", Companies: 'text' });
