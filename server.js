@@ -35,7 +35,7 @@ hbs.registerHelper("makeCard", function(Cname,Pname,price,discount){
       price = hbs.Utils.escapeExpression(price);
       discount = hbs.Utils.escapeExpression(discount);
 
-      var name = Cname + "-" + Pname;
+      var name = Cname.toLowerCase() + "-" + Pname.toLowerCase();
       var title = Cname + ' ' + Pname;
       //   var linkName = name.replace(/\s/g,"-");
       var linkName = encodeURIComponent(name);
