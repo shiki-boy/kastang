@@ -282,16 +282,17 @@ app.get('/home',(request,response) => {
 app.get('/buy/:name',(request, response)=>{
     Product.findOne({Pname : request.params.name.split('-')[1]}).select('Pname Cname price discount -_id')
     .then((docs)=>{
-        response.render('buypage.hbs',{
-            productName: request.params.name,
-            price: docs.price,
-            discount: docs.discount,
-            imgInfo: [{ img_name: request.params.name.toLowerCase(),n:1},
-                    { img_name: request.params.name.toLowerCase(), n: 2 },
-                    { img_name: request.params.name.toLowerCase(), n: 3 },
-                    { img_name: request.params.name.toLowerCase(), n: 4 },
-                    ]
-        });
+        console.log(request.params.name.split('-')[1]);
+        // response.render('buypage.hbs',{
+        //     productName: request.params.name,
+        //     price: docs.price,
+        //     discount: docs.discount,
+        //     imgInfo: [{ img_name: request.params.name.toLowerCase(),n:1},
+        //             { img_name: request.params.name.toLowerCase(), n: 2 },
+        //             { img_name: request.params.name.toLowerCase(), n: 3 },
+        //             { img_name: request.params.name.toLowerCase(), n: 4 },
+        //             ]
+        // });
         },(err)=>{
             console.log(err);
             response.send(err);
@@ -344,10 +345,11 @@ app.get('/logout',(req,res)=>{
 // -------------------------------------------------------------------------------------------------------
 var brands = [];
 app.get('/products/:type',(request,response)=>{
+    console.log(request.params.type);
     Brands.find({ProductType: request.params.type}).select('Companies -_id')
     .then((docs)=>{
+        console.log(docs);
         brands = docs[0].Companies;
-        // console.log(brands);
     },(err)=>{
         console.log(err);
     });
