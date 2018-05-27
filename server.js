@@ -151,8 +151,9 @@ app.post('/charge',(req,res)=>{
 // ----------------------------------------------------------------------------------------
 app.post('/c',(req,res)=>{
     if(!req.session.user){
-        console.log('no one logged in');
-        res.status(401).send('error');
+        // console.log('no one logged in');
+        // res.status(401).send('error');
+        return;
     }
     else{
         User.findOne({ email: req.session.user })
@@ -342,16 +343,15 @@ app.get('/logout',(req,res)=>{
 
 // -------------------------------------------------------------------------------------------------------
 var brands = [];
-app.get('/laptops',(request,response)=>{
-
-    Brands.find({ProductType:"laptops"}).select('Companies -_id')
+app.get('/products/:type',(request,response)=>{
+    Brands.find({ProductType: request.params.type}).select('Companies -_id')
     .then((docs)=>{
         brands = docs[0].Companies;
         // console.log(brands);
     },(err)=>{
         console.log(err);
     });
-    Product.find({category: "laptop"})
+    Product.find({category: request.params.type})
     .limit(2)
     .select('Cname Pname price discount -_id').then((docs)=>{
         if(!docs){
@@ -376,7 +376,7 @@ app.get('/laptops',(request,response)=>{
 app.post('/paginate',(req,res)=>{
     var count = req.body.count;
     var itemsPerPage = 2;
-    Product.find({ category: "laptop" })
+    Product.find({ category: req.body.type })
         .skip(count*itemsPerPage)
         .limit(itemsPerPage)
         .select('Cname Pname price discount -_id').then((docs) => {
@@ -396,31 +396,31 @@ app.post('/paginate',(req,res)=>{
 
 // -----------------------------------------------------------------------------------------------
 
-app.get('/mobiles', (request, response) => {
-    Brands.find({ ProductType: "laptops" }).select('Companies -_id')
-        .then((docs) => {
-            brands = docs[0].Companies;
-            // console.log(brands);
-        }, (err) => {
-            console.log(err);
-        });
-    Product.find({ category: "mobile" }).select('Cname Pname price discount -_id').then((docs) => {
-        if (!docs) {
-            console.log('no docs');
-            return;
-        }
-        else {
-            // console.log(docs);
-            response.render('allstuff.hbs', {
-                results: docs,
-                brands: brands.sort()
-            });
-        }
-    },
-        (err) => {
-            console.log(err);
-        });
-});
+// app.get('/products/:type', (request, response) => {
+//     Brands.find({ ProductType: req.params.type }).select('Companies -_id')
+//         .then((docs) => {
+//             brands = docs[0].Companies;
+//             // console.log(brands);
+//         }, (err) => {
+//             console.log(err);
+//         });
+//     Product.find({ category: "mobile" }).select('Cname Pname price discount -_id').then((docs) => {
+//         if (!docs) {
+//             console.log('no docs');
+//             return;
+//         }
+//         else {
+//             // console.log(docs);
+//             response.render('allstuff.hbs', {
+//                 results: docs,
+//                 brands: brands.sort()
+//             });
+//         }
+//     },
+//         (err) => {
+//             console.log(err);
+//         });
+// });
 
 // ------------------------------------------------------------------------------------------------
 

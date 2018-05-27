@@ -9,12 +9,12 @@
 
   <!-- CSS  -->
   <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
-  <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet" />
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
-  <link href="css/logo.css" type="text/css" rel="stylesheet" media="screen,projection" />
-  <link href="css/my-css.css" type="text/css" rel="stylesheet" media="screen,projection" />
-  <link href="css/animate.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+  <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="/css/logo.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="/css/my-css.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="/css/animate.css" type="text/css" rel="stylesheet" media="screen,projection" />
 
 </head>
 
@@ -119,9 +119,9 @@
   <div class="section"></div>
   <div class="section"></div>
   {{> footer}} {{!-- Scripting --}}
-  <script src="js/jquery.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/my-script.js"></script>
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/materialize.js"></script>
+  <script src="/js/my-script.js"></script>
   
 
   <script type="text/javascript">
@@ -154,8 +154,7 @@
     var j = 0;
     var context = [];
     var count = 1;
-    var type = document.location.href.split('/');
-    type = type[type.length - 1];
+    var type = document.location.href.split('/')[4];
 
     function getMore() {
       $.ajax({
