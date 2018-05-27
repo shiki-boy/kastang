@@ -170,7 +170,7 @@
             var price = data["" + x].price;
             var discount = data["" + x].discount;
 
-            var name = Cname + "-" + Pname;
+            var name = Cname.toLowerCase() + "-" + Pname.toLowerCase();
             var title = Cname + ' ' + Pname;
             var linkName = encodeURIComponent(name);
 
