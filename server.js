@@ -346,7 +346,7 @@ app.get('/laptops',(request,response)=>{
 
     Brands.find({ProductType:"laptops"}).select('Companies -_id')
     .then((docs)=>{
-        brands = docs[0].Companies.split(' ');
+        brands = docs[0].Companies;
         // console.log(brands);
     },(err)=>{
         console.log(err);
