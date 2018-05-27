@@ -152,7 +152,7 @@ app.post('/charge',(req,res)=>{
 app.post('/c',(req,res)=>{
     if(!req.session.user){
         console.log('no one logged in');
-        res.status(404).send('error');
+        res.status(401).send('error');
     }
     else{
         User.findOne({ email: req.session.user })
