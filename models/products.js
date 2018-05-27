@@ -49,7 +49,7 @@ var BrandsSchema = new mongoose.Schema({
         type: String
     },
     Companies:{
-        type: String
+        type: [String]
     }
 });
 
