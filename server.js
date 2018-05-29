@@ -38,7 +38,7 @@ hbs.registerHelper("makeCard", function(Cname,Pname,price,discount){
       var name = Cname.toLowerCase() + "-" + Pname.toLowerCase();
       var title = Cname + ' ' + Pname;
       //   var linkName = name.replace(/\s/g,"-");
-      var linkName = encodeURIComponent(name);
+      var linkName = encodeURIComponent(Cname + '-' + Pname);
 
       var card = `
       <div class="card medium z-depth-2 hoverable">
@@ -282,17 +282,16 @@ app.get('/home',(request,response) => {
 app.get('/buy/:name',(request, response)=>{
     Product.findOne({Pname : request.params.name.split('-')[1]}).select('Pname Cname price discount -_id')
     .then((docs)=>{
-        console.log(request.params.name.split('-')[1]);
-        // response.render('buypage.hbs',{
-        //     productName: request.params.name,
-        //     price: docs.price,
-        //     discount: docs.discount,
-        //     imgInfo: [{ img_name: request.params.name.toLowerCase(),n:1},
-        //             { img_name: request.params.name.toLowerCase(), n: 2 },
-        //             { img_name: request.params.name.toLowerCase(), n: 3 },
-        //             { img_name: request.params.name.toLowerCase(), n: 4 },
-        //             ]
-        // });
+        response.render('buypage.hbs',{
+            productName: request.params.name,
+            price: docs.price,
+            discount: docs.discount,
+            imgInfo: [{ img_name: request.params.name.toLowerCase(),n:1},
+                    { img_name: request.params.name.toLowerCase(), n: 2 },
+                    { img_name: request.params.name.toLowerCase(), n: 3 },
+                    { img_name: request.params.name.toLowerCase(), n: 4 },
+                    ]
+        });
         },(err)=>{
             console.log(err);
             response.send(err);
@@ -345,10 +344,10 @@ app.get('/logout',(req,res)=>{
 // -------------------------------------------------------------------------------------------------------
 var brands = [];
 app.get('/products/:type',(request,response)=>{
-    console.log(request.params.type);
+    // console.log(request.params.type);
     Brands.find({ProductType: request.params.type}).select('Companies -_id')
     .then((docs)=>{
-        console.log(docs);
+        // console.log(docs);
         brands = docs[0].Companies;
     },(err)=>{
         console.log(err);
@@ -398,31 +397,6 @@ app.post('/paginate',(req,res)=>{
 
 // -----------------------------------------------------------------------------------------------
 
-// app.get('/products/:type', (request, response) => {
-//     Brands.find({ ProductType: req.params.type }).select('Companies -_id')
-//         .then((docs) => {
-//             brands = docs[0].Companies;
-//             // console.log(brands);
-//         }, (err) => {
-//             console.log(err);
-//         });
-//     Product.find({ category: "mobile" }).select('Cname Pname price discount -_id').then((docs) => {
-//         if (!docs) {
-//             console.log('no docs');
-//             return;
-//         }
-//         else {
-//             // console.log(docs);
-//             response.render('allstuff.hbs', {
-//                 results: docs,
-//                 brands: brands.sort()
-//             });
-//         }
-//     },
-//         (err) => {
-//             console.log(err);
-//         });
-// });
 
 // ------------------------------------------------------------------------------------------------
 
