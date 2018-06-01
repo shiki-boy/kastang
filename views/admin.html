@@ -368,7 +368,8 @@
                             <div class="collapsible-header">
                                 <!-- Heading -->
                                 <div class="input-field col s9" style="margin-left:0;">
-                                    <input value="General" name="heading-1" type="text" class="validate" style="font-size: xx-large;" required>
+                                    <input value="General" name="heading-1" type="text" class="validate black-text" 
+                                        style="font-size: xx-large;" required disabled>
                                     <label for="heading-1">Heading</label>
                                 </div>
                             </div>
@@ -395,9 +396,10 @@
                         <div id="place-heading-here"></div>
 
                     </ul>
-                    <button class="waves-effect waves-orange btn-large right green" type="submit" style="border-radius: 12px;">+add product</button>
+                    <button class="waves-effect waves-orange btn-large right green" type="submit" 
+                        style="border-radius: 12px;">&#10010; add product</button>
                     <button id="clear-all-btn" class="waves-effect waves-orange btn-large red" type="reset" 
-                        style="border-radius: 12px;">-clear all</button>
+                        style="border-radius: 12px;">&#10006; clear all</button>
                 </div>
             </form>
 
@@ -574,14 +576,15 @@
         
         $("#clear-all-btn").click(function(){
             $(".added_heading").detach();
-            
+            setTimeout(()=>{
+                M.updateTextFields();
+            },2);
             
             var el = $(".add-heading")
-            for(i in el){
-                console.log(i);
+            $(el[0]).show();
+            for(i=1;i<el.length;i++){
+                $(el[i]).detach();
             }
-            
-            M.updateTextFields();
         });
 
 
