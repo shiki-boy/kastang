@@ -528,6 +528,121 @@ app.post('/test',(req,res)=>{
 // ------------------------------------------------------------------------------------------------------
 
 app.post('/updateProduct',(req,res)=>{
+    var obj = req.body.u_info;
+    obj = JSON.parse(obj);
+    console.log(obj);
+    ProductInfo.findOneAndUpdate({
+        Pname : '' + req.body.old_Pname + ' ' + req.body.old_Cname,
+    },{
+        $set:{
+            Pname : '' + req.body.u_company + ' ' + req.body.u_name,
+            info : obj
+        }
+    },{
+        returnOriginal : false 
+    })
+    .then((docs)=>{
+        console.log('info collc ...');
+        Product.findOneAndUpdate({
+            Cname:req.body.old_Cname,
+            Pname:req.body.old_Pname
+        },{
+            $set:{
+                Cname:req.body.u_company,
+                Pname:req.body.u_name,
+                categories:req.body.u_categories,
+                price:req.body.u_price,
+                discount:req.body.u_discount
+            }
+        },{
+            returnOriginal:false
+        })
+        .then((docs)=>{
+            console.log('updating.. main');
+        },(err)=>{
+            console.log(err);
+        });
+        
+    },(err)=>{
+        console.log(err);
+    });
+
+
+
+});
+
+// -------------------------------------------------------------------------------------------------------
+
+app.post('/deleteProduct',(req,res)=>{
+    Product.remove({Cname: req.body.Cname, Pname: req.body.Pname})
+    .then((result)=>{
+        // console.log(result);
+        ProductInfo.remove({Pname: req.body.Cname + ' ' + req.body.Pname})
+        .then((result)=>{
+            // console.log(result);
+            res.status(200).send('deleted');
+        },(err)=>{
+            console.log(err);
+        })
+    },(err)=>{
+        console.log(err);
+    })
+
+});
+
+// ----------------------------------------------------------------------------------------------------
+
+app.post('/adminSearch',(req,res)=>{
+
+    var search = req.body.query;
+
+    Product.find({ $text: { $search: search } }).select('-_id -category -__v').lean()      // .lean() bcoz we dont need to get mongoose model just json as we are not saving the result just using it for front end
+        .exec()                                                                         // returns a promise
+        .then((docs) => {
+            if (!(_.isEmpty(docs))) {
+                // console.log('1');
+                return docs;
+            }
+            else {
+                return reject('no name');
+                // Product.find({category: {$in: search }}, function(err,docs){
+                // console.log("not find name so in category");
+                // return docs;
+                //  });
+            }
+        })
+        .then((docs) => {
+            // console.log('returned docs found in company or name');
+            res.status(200).send(docs);
+            // console.log(docs);
+
+            // res.render('searchres.hbs', {
+            //     results: docs,
+            //     query: search_copy
+            // });
+        }, (msg) => {
+            console.log(msg);
+            Product.find({ category: { $in: search } }, function (err, docs) {
+                // console.log("not find name... so in category");
+                // console.log(docs);
+                res.status(200).send(docs);
+
+                // res.render('searchres.hbs', {
+                //     results: docs,
+                //     query: search_copy
+                // });
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(404).send();
+        });
+
+});
+
+// ------------------------------------------------------------------------------------------------
+
+app.post('/showDetails',(req,res)=>{
     var info = [];
     Product.find({'Pname': req.body.Pname, 'Cname': req.body.Cname}).select('-_id')
     .then((docs)=>{
@@ -535,7 +650,7 @@ app.post('/updateProduct',(req,res)=>{
         ProductInfo.find({ 'Pname': "" + req.body.Cname + " " + req.body.Pname}).select('-_id -Pname -__v')
         .then((docs)=>{
             info.push(docs[0]);
-            console.log(info);
+            // console.log(info);
             res.send(info);
         });
     },(err)=>{

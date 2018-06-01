@@ -82,42 +82,45 @@
     <div id="modal2" class="modal modal-fixed-footer" style="width: 70em;">
         <div class="modal-content">
             <h4 class="green-text center-align light">Update Product</h4>
-            <div class="row">
-                <div class="input-field col s3">
-                    <input id="u_company" name="u_company" type="text">
-                    <label for="u_company">Company</label>
+            <form id="update_product_form" action="/updateProduct">
+                <input type="hidden" name="old_Cname">
+                <input type="hidden" name="old_Pname">
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input id="u_company" name="u_company" type="text">
+                        <label for="u_company">Company</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input id="u_name" name="u_name" type="text">
+                        <label for="u_name">Name</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input id="u_price" name="u_price" type="text">
+                        <label for="u_price">Price</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input id="u_discount" name="u_discount" type="number">
+                        <label for="u_discount">Discount</label>
+                    </div>
                 </div>
-                <div class="input-field col s3">
-                    <input id="u_name" name="u_name" type="text">
-                    <label for="u_name">Name</label>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <textarea id="u_categories" name="u_categories" class="materialize-textarea"></textarea>
+                        <label for="u_categories">Categories</label>
+                    </div>
                 </div>
-                <div class="input-field col s3">
-                    <input id="u_price" name="u_price" type="text">
-                    <label for="u_price">Price</label>
-                </div>
-                <div class="input-field col s3">
-                    <input id="u_discount" name="u_discount" type="number">
-                    <label for="u_discount">Discount</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s8">
-                    <textarea id="u_categories" name="u_categories" class="materialize-textarea"></textarea>
-                    <label for="u_categories">Categories</label>
-                </div>
-            </div>
 
-            <div class="row">
-                <h4 class="teal-text">Specifications :</h4>
-                <textarea id="u_info" style="height: 17em;"></textarea>
-            </div>
-                
+                <div class="row">
+                    <h4 class="teal-text">Specifications :</h4>
+                    <textarea name="u_info" id="u_info" style="height: 17em;"></textarea>
+                </div>
 
         </div>
         <div class="modal-footer">
-            <a href="#!" class="u_save modal-action modal-close waves-effect waves-green btn-flat green-text text-darken-2">Save</a>
+            <button type="submit" class="modal-action waves-effect waves-green btn-flat green-text text-darken-2">Save</button>
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
         </div>
+        </form>
     </div>
 
     <!-- ======================================================================================= -->
@@ -131,6 +134,21 @@
         </div>
         <div class="modal-footer">
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+        </div>
+    </div>
+
+    <!-- =============================================================================================== -->
+
+    <!-- ===================================== PRODUCT DELETE? MODAL  =================================== -->
+
+    <div id="modal_deleteProd" class="modal" style="border-radius: 15px;">
+        <div class="modal-content">
+            <h4 class="center-align">Are you sure you want to delete 
+                <span class="green-text light" id="delete-product-name"></span> ?</h4>
+        </div>
+        <div class="modal-footer">
+            <a id="confirm-delete" class="modal-action waves-effect waves-green btn-flat">YES</a>
+            <a class="modal-action modal-close waves-effect btn-flat">Cancel</a>
         </div>
     </div>
 
@@ -377,7 +395,9 @@
                         <div id="place-heading-here"></div>
 
                     </ul>
-                    <button class="waves-effect waves-orange btn-large right green" onclick="addNew();" type="submit" style="border-radius: 12px;">+add product</button>
+                    <button class="waves-effect waves-orange btn-large right green" type="submit" style="border-radius: 12px;">+add product</button>
+                    <button id="clear-all-btn" class="waves-effect waves-orange btn-large red" type="reset" 
+                        style="border-radius: 12px;">-clear all</button>
                 </div>
             </form>
 
@@ -388,9 +408,12 @@
                     <div class="row">
                         <div class="input-field col s6 push-s3">
                             <i class="material-icons prefix">search</i>
-                            <input id="search" name="search" type="search">
+                            <input name="search" type="search">
                             <label for="search" style="color: black;">Search Products</label>
                         </div>
+                        <a class="btn-floating right waves-effect waves-light red" id="search-btn"  style="left: -180px;top: 12px;">
+                            <i class="material-icons">search</i>
+                        </a>
                     </div>
                     <div class="section"></div>
                     <hr class="col s12 push-s1" style="border-style: double;color: #224ec5b0;opacity: 0.7;
@@ -408,42 +431,10 @@
                                     <th>Discount%</th>
                                 </tr>
                             </thead>
-                            
+
                             <tbody>
-                                <tr>
-                                    <td>Ideapad</td>
-                                    <td>Lenovo</td>
-                                    <td>46,000</td>
-                                    <td>5</td>
-                                    <td>
-                                        <span class="">
-                                            <a class="btn-flat modal-trigger update_prod"  href="#modal2" style="padding-left: 0;padding-right: 12px;">
-                                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                                            </a>
-                                            <a class="btn-flat delete_prod" style="padding-left: 0;padding-right: 7px;">
-                                                <i class="fa fa-trash" aria-hidden="true"></i>
-                                            </a>
-                                        </span>
-                                    </td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>Spectre</td>
-                                    <td>HP</td>
-                                    <td>1,12,000</td>
-                                    <td>7</td>
-                                    <td>
-                                        <span class="">
-                                            <a class="btn-flat modal-trigger update_prod" href="#modal2" style="padding-left: 0;padding-right: 12px;">
-                                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                                            </a>
-                                            <a class="btn-flat delete_prod" style="padding-left: 0;padding-right: 7px;">
-                                                <i class="fa fa-trash" aria-hidden="true"></i>
-                                            </a>
-                                        </span>
-                                    </td>
-                                    
-                                </tr>
+                                
+                                <tr id="place-search-res-here"></tr>
                             </tbody>
                         </table>
                     </div>
@@ -465,34 +456,36 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/velocity.min.js"></script>
-     <script>
+    <script>
         var i = 0;
         var position = 1;
         var pos_in_mod = 1;
         var product = null;
+
         
-        function delay(url,time){
-            setTimeout(()=>{window.location = url},time);
+
+        function delay(url, time) {
+            setTimeout(() => { window.location = url }, time);
         }
-        
-        $("#all-prod-data").submit(function(event){
+
+        $("#all-prod-data").submit(function (event) {
             event.preventDefault();
             console.log('ho');
-                if( $("input[name='company'").val() == '' || 
+            if ($("input[name='company'").val() == '' ||
                 $("input[name='product_name'").val() == '' ||
-                $("input[name='price'").val() == '' || 
+                $("input[name='price'").val() == '' ||
                 $("input[name='discount'").val() == '' ||
-                document.getElementById('categories').value == '' ){
-                    alert('some fields are empty');
-                    return ;
-                }
-            else{
+                document.getElementById('categories').value == '') {
+                alert('some fields are empty');
+                return;
+            }
+            else {
 
                 $.ajax({
                     url: $("#all-prod-data").attr('action'),
                     method: "POST",
                     data: $("#all-prod-data").serialize(),
-                    success: function(data, status){
+                    success: function (data, status) {
                         if (data != 'done') {
                             alert('error');
                         }
@@ -500,22 +493,107 @@
                             $("#modal_addedProd").modal('open');
                             console.log(data, status);
                         }
-                    } 
+                    }
                 });
-                
+
             }
         });
 
+        $("#update_product_form").submit(function (event) {
+            event.preventDefault();
+            if ($("input[name='u_company'").val() == '' ||
+                $("input[name='u_name'").val() == '' ||
+                $("input[name='u_price'").val() == '' ||
+                $("input[name='u_discount'").val() == '' ||
+                document.getElementById('u_categories').value == '') {
+                alert('some fields are empty');
+                return;
+            }
+            try{
+                var obj = $("#u_info").val();
+                obj = JSON.parse(obj);
+            }
+            catch(msg){
+                alert(msg);
+                alert('JSON parse error');
+                return;
+            }
+            $.ajax({
+                url: $("#update_product_form").attr('action'),
+                method: "POST",
+                data: $("#update_product_form").serialize(),
+                success: function (data, status) {
+                    if (data != 'done') {
+                        alert('error');
+                    }
+                    else {
+                        $("#modal_addedProd").modal('open');
+                        console.log(data, status);
+                    }
+                }
+            });
+
+
+        });
+
+        $("#search-btn").click(function(){
+            var query = $("input[name='search']").val();
+
+            $.ajax({
+                url: '/adminSearch',
+                method: "POST",
+                data: {query},
+                success: function(data){
+                    // console.log(data)
+                    $(".added").detach();
+                    for (i in data){
+                        var html = `
+                            <tr class="added">
+                                <td>${data[""+i].Pname}</td>
+                                <td>${data[""+i].Cname}</td>
+                                <td>${data[""+i].price}</td>
+                                <td>${data[""+i].discount}</td>
+                                <td>
+                                    <span>
+                                        <a class="btn-flat modal-trigger update_product_btn" href="#modal2" style="padding-left: 0;padding-right: 12px;">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        </a>
+                                        <a class="btn-flat delete_product_btn" style="padding-left: 0;padding-right: 7px;">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>
+                                    </span>
+                                </td>
+                            </tr>`;
+
+                       $("#place-search-res-here").before(html); 
+                    }
+                }
+            })
+
+        });
         
+        $("#clear-all-btn").click(function(){
+            $(".added_heading").detach();
+            
+            
+            var el = $(".add-heading")
+            for(i in el){
+                console.log(i);
+            }
+            
+            M.updateTextFields();
+        });
+
+
 
         $(document).ready(function () {
-            
+
             $('.tabs').tabs();
 
             $('.collapsible').collapsible();
 
             $('#modal1').modal();
-            $('#modal2,#modal_addedProd').modal({
+            $('#modal2,#modal_addedProd,#modal_deleteProd').modal({
                 dismissible: false, // Modal can be dismissed by clicking outside of the modal
                 opacity: 0.8, // Opacity of modal background
                 inDuration: 300, // Transition in duration
@@ -579,41 +657,71 @@
                 $('#new-prod-data').hide();
             });
 
-            $(".update_prod").click(function () {
-                alert();
+            $("tbody").on("click", '.update_product_btn',function () {
+
                 var element = $(this).parent().parent().parent()["0"];
                 var Pname = element.cells["0"].innerText;
                 var Cname = element.cells["1"].innerText;
-                
-                    $.ajax({
-                        url: "/updateProduct",
-                        type: "POST",
-                        data: { Cname, Pname },
-                        success: function (data) {
-                            // console.log(data[1].info["0"]);
-                            $("#modal2").modal('open');
-                            $("#u_company").val(data["0"].Cname);
-                            $("#u_name").val(data["0"].Pname);
-                            $("#u_price").val(data["0"].price);
-                            $("#u_discount").val(data["0"].discount);
-                            var categories = '';
-                            for (x in data["0"].category) {
-                                categories += data["0"].category[x] + " ";
-                            }
-                            $("#u_categories").val(categories);
 
-                            var info = data[1].info["0"];
-                            console.log(info);
-                            
-                            $("#u_info").val(JSON.stringify(info,undefined,12));
-
-                            M.updateTextFields();
+                $.ajax({
+                    url: "/showDetails",
+                    type: "POST",
+                    data: { Cname, Pname },
+                    success: function (data) {
+                        // console.log(data[1].info["0"]);
+                        $("#modal2").modal('open');
+                        $("input[name='old_Cname'").val(data["0"].Cname);
+                        $("input[name='old_Pname'").val(data["0"].Pname);
+                        $("#u_company").val(data["0"].Cname);
+                        $("#u_name").val(data["0"].Pname);
+                        $("#u_price").val(data["0"].price);
+                        $("#u_discount").val(data["0"].discount);
+                        var categories = '';
+                        for (x in data["0"].category) {
+                            categories += data["0"].category[x] + " ";
                         }
-                    });
+                        $("#u_categories").val(categories);
+
+                        var info = data[1].info["0"];
+                        console.log(info);
+
+                        $("#u_info").val(JSON.stringify(info, undefined, 12));
+
+                        M.updateTextFields();
+                    }
+                });
+            });
+            
+            $("tbody").on('click','.delete_product_btn',function(){
+                $("#modal_deleteProd").modal('open');
+                var element = $(this).parent().parent().parent()["0"];
+                var Pname = element.cells["0"].innerText;
+                var Cname = element.cells["1"].innerText;
+
+                $("#delete-product-name").text(Cname +'-'+Pname);
+            });
+
+            $("#confirm-delete").click(function(){
+                var el = $(this).parent().siblings()[0];
+                var name = $(el).children()["0"].children["0"].innerText;
+                var Cname = name.split('-')[0];
+                var Pname = name.split('-')[1];
+                
+                $.ajax({
+                    url: '/deleteProduct',
+                    method: "POST",
+                    data:{Cname , Pname},
+                    success:function(){
+                        alert("Product deleted");
+                        $("#modal_deleteProd").modal('close');
+                    }
+                });
             });
 
 
         });
+
+
 
 
         function addKv(el) {
@@ -648,7 +756,7 @@
             var html = `<a class="left btn-floating blue add-heading" number="${position}" onclick="addHeading(this);">
                                 <i class="material-icons">add</i>
                             </a>
-                            <li>
+                            <li class="added_heading">
                                 <div class="collapsible-header">
                                     <div class="input-field col s9" style="margin-left:0;">
                                         <input name="heading-${position}" type="text" style="font-size: xx-large;">
@@ -678,7 +786,7 @@
             $("#place-heading-here").before(html);
         }
 
-        
+
     </script>
 
 </body>

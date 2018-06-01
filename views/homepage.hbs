@@ -108,7 +108,7 @@
     <div class="container center">
       <div class="section"></div>
       <div class="section"></div>
-      <a class="waves-effect waves-blue btn-large pink pulse" id="explore" style="border-top-left-radius: 25px;
+      <a class="waves-effect waves-blue btn-large  pulse" id="explore" style="border-top-left-radius: 25px;
     border-bottom-right-radius: 25px;">
         Explore</a>
     </div>
@@ -185,6 +185,13 @@
 
     $(document).ready(() => {
 
+      $("#navbar-last-link").css("margin-right",window.innerWidth/3.06966);
+      $(".logoPos").css("margin-left",window.innerWidth/6.72906);
+
+      $(window).resize(function(){
+        $("#navbar-last-link").css("margin-right",window.innerWidth/3.06966);
+        $(".logoPos").css("margin-left",window.innerWidth/6.72906);
+      });
 
       $('#search ').autocomplete({
         data: {
