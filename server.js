@@ -268,6 +268,15 @@ app.get('/secretadmin',(req,res)=>{
     res.render('adminlogin.hbs');
 });
 
+app.post('/cms',(req,res)=>{
+    if(req.body.userId == '123456' && req.body.password == '123456'){
+        res.redirect('/admin');
+    }
+    else{
+        res.end('?');
+    }
+});
+
 // -------------------------------------------------------------------------------------------------------
 
 
