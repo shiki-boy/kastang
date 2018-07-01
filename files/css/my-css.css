@@ -1,4 +1,8 @@
-
+@font-face{
+	font-family: 'kastangFont';
+	src: url("./ARCENA.ttf"),
+		 url('./ARCENA.ttf')  format('truetype');
+	}
 #mytext{
         text-shadow:  8px 7px 9px black;
         font-size: 45px;
